@@ -1,0 +1,125 @@
+﻿@model TraCuuThuatNgu.ViewModels.AddTermViewModel
+@{
+    ViewBag.Title = "Thêm thuật ngữ";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<style type="text/css">
+    #ManageEntries
+    {
+        border-color: #143D6B;
+        background: url("/Content/img/backgrounds/menu-item-active.jpg") left top repeat-x;
+    }
+</style>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+<div class="row-fluid">
+    <a href="/ManageEntries" class="btn-link">
+        <h4 style="margin-top: 0px">
+            ← Quay lại danh sách</h4>
+    </a>
+    <div class="span span12">
+        <div class="head">
+            <div class="icm-plus">
+            </div>
+            <h1>
+                Thêm thuật ngữ</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block">
+            @using (Html.BeginForm("Add", "ManageEntries", FormMethod.Post, new { id = "edit-synset-form" }))
+            {
+                <div class="entry-form">
+                    <div class="editor">
+                        <div class="editor-label">
+                            Thuật ngữ
+                        </div>
+                        <div class="editor-field">
+                            @if (Request.QueryString["headWord"] != null)
+                            {                                 
+                                @Html.TextBoxFor(m => m.HeadWord, new { @Value = Request.QueryString["headWord"].ToString() })
+                            }
+                            else
+                            { 
+                                @Html.TextBoxFor(m => m.HeadWord)
+                            }
+                            @Html.ValidationMessageFor(m => m.HeadWord)
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="editor">
+                        <div class="editor-label">
+                            Loại từ
+                        </div>
+                        <div class="editor-field">
+                            @Html.DropDownListFor(m => m.Catagory, new[] {
+new SelectListItem() {Text = "Danh từ", Value = "n",Selected = true},
+new SelectListItem() {Text = "Động từ", Value = "v"},
+new SelectListItem() {Text = "Tính từ", Value = "a"}
+})
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="editor">
+                        <div class="editor-label">
+                            Giải thích
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(m => m.Def, new { Class = "text" })
+                            @Html.ValidationMessageFor(m => m.Def)
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="editor">
+                        <div class="editor-label">
+                            Ví dụ
+                        </div>
+                        <div class="editor-field">
+                            @Html.TextAreaFor(m => m.Exa, new { Class = "text" })
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="editor">
+                        <div class="editor-label">
+                            Từ đồng nghĩa
+                        </div>
+                        <div class="editor-field">
+                            <input type="text" id="input-synonym" />
+                            @Html.HiddenFor(m => m.Synonyms, new { id = "synonyms-data" })
+                            <a style="padding: 5px 26px; margin-left: 5px;" href="javascript://" id="add-synonym"
+                                class="btn-link btn-add">Thêm từ đồng nghĩa</a>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="editor">
+                        <div class="editor-label">
+                        </div>
+                        <div class="editor-field">
+                            <ul id="list-synonyms">
+                            </ul>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="editor">
+                        <div class="editor-label">
+                        </div>
+                        <div class="editor-field">
+                            <input type="submit" class="btn" value="Thêm" />
+                            <span style="color: Green">@ViewBag.Success</span> <span style="color: red">@ViewBag.Fail</span>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                </div>   
+            }
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>

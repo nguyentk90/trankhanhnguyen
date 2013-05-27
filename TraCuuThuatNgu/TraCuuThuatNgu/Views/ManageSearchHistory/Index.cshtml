@@ -1,0 +1,128 @@
+﻿@model TraCuuThuatNgu.ViewModels.ManageSearchHistoryViewModel
+@{
+    ViewBag.Title = "Thống kê tra cứu";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<style type="text/css">
+    #ManageSearchHistory
+    {
+        border-color: #143D6B;
+        background: url("/Content/img/backgrounds/menu-item-active.jpg") left top repeat-x;
+    }
+</style>
+<div class="row-fluid">
+    <h2>
+        Thống kê tra cứu</h2>
+    <div class="dr">
+        <span></span>
+    </div>
+    <div class="span span12">
+        <div class="block block-sumary">
+            <div class="sumary">
+                <div class="sumary-item">
+                    <label>
+                        Tổng lượt tra cứu</label>
+                    <span>@Model.SummarySearchHistoryModel.GetSearchHistoryCountTime</span>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="sumary-item">
+                    <label>
+                        Số từ khóa được tra cứu</label>
+                    <span>@Model.SummarySearchHistoryModel.GetSearchHistoryCountKeyword</span>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="sumary-item">
+                    <label>
+                        Đã có trong dữ liệu</label>
+                    <span>@Model.SummarySearchHistoryModel.GetSearchHistoryIsExist</span>
+                    <div class="clear">
+                    </div>
+                </div>
+                <div class="sumary-item">
+                    <label>
+                        Chưa có trong dữ liệu</label>
+                    <span>@Model.SummarySearchHistoryModel.GetSearchHistoryIsNotExist</span>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="span span12">
+        <div class="head">
+            <div class="icm-zoom">
+            </div>
+            <h1>
+                Danh sách tra cứu</h1>
+            <span class="sort-control">
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $("#order-search-history option[value='@ViewBag.OrderBy']").attr('selected', 'selected');
+                    });
+                </script>
+                Sắp xếp theo
+                <select id="order-search-history">
+                    <option value="0">Thời gian</option>
+                    <option value="1">Trạng thái</option>
+                    <option value="2">Lượt tra</option>
+                </select>
+            </span>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block">
+            <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                <thead>
+                    <tr>
+                        <th width="25%">
+                            Từ tra cứu
+                        </th>
+                        <th width="25%">
+                            Có trong dữ liệu
+                        </th>
+                        <th width="25%">
+                            Lượt tra cứu
+                        </th>
+                        <th width="25%">
+                            Tra lần cuối lúc
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.GetAllSearchHistory)
+                    {
+                        <tr>
+                            <td>
+                                @item.Keyword
+                            </td>
+                            <td>
+                                @if (item.IsExist)
+                                {
+                                    <span class="label label-success">Đã có</span>
+                                }
+                                else
+                                {
+                                    <span class="label label-important">Chưa có</span> 
+                                }
+                            </td>
+                            <td>
+                                @item.Counter
+                            </td>
+                            <td>
+                                @String.Format("{0:d/M/yyyy HH:mm}", item.DateModify)
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="view-more">
+                @Html.PagedListPager((IPagedList)Model.GetAllSearchHistory, page => Url.Action("Index", new { page = page, orderby = Request.QueryString["orderby"] }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })</div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+</div>

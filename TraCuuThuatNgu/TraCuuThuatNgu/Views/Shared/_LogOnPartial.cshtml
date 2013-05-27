@@ -1,0 +1,29 @@
+﻿@if (Request.IsAuthenticated)
+{    
+    <li>Xin chào, <a id="user-login" href="#">@User.Identity.Name</a>
+        <ul class="dropdown-menu">
+        @if (User.IsInRole("Admin"))
+        { 
+            <li><a href="/Admin">Quản lý</a></li>
+        }
+            <li><a href="/Account/Info">Thông tin tài khoản</a></li>
+            <li><a href="/UserHistory">Lịch sử tra cứu</a></li>
+            <li><a href="/Like">Yêu thích</a></li>
+            <li class="divider"></li>
+            <li><a href="@Url.Content("~/Account/LogOff")">Thoát</a></li>
+        </ul>
+    </li>
+}
+else
+{
+    var controllerName = ViewContext.RouteData.Values["Controller"].ToString();
+    if (controllerName.Equals("Home") || controllerName.Equals("Account"))
+    {
+    <li class="login-icon"><a href="/Account/LogOn" class="popUpLogon">Đăng nhập</a></li>   
+    }
+    else
+    { 
+    <li class="login-icon"><a href="#" class="popUpLogon">Đăng nhập</a></li> 
+    }
+    <li class="register-icon"><a href="@Url.Content("~/Account/Register")">Đăng ký</a></li>
+}

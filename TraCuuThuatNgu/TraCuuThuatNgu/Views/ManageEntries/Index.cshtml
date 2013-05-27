@@ -1,0 +1,212 @@
+﻿@model TraCuuThuatNgu.ViewModels.EntriesViewModel
+@{
+    ViewBag.Title = "Quản lý thuật ngữ";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<style type="text/css">
+    #ManageEntries
+    {
+        border-color: #143D6B;
+        background: url("/Content/img/backgrounds/menu-item-active.jpg") left top repeat-x;
+    }
+</style>
+<div class="row-fluid">
+    <h2>
+        Danh sách thuật ngữ</h2>
+    <a style="float: right; margin-left: 20px; margin-top: -25px;" href="/ManageEntries/Add"
+        id="add-content-btn" class="btn-link btn-add">Thêm thuật ngữ</a>
+    <div class="dr">
+        <span></span>
+    </div>
+    <div class="span span12">
+        <div class="block block-sumary">
+            <div class="sumary aphab-list">
+                <a id="all" href="/ManageEntries">Tất cả</a> <a id="A" href="/ManageEntries?startWith=A">
+                    A</a> <a id="B" href="/ManageEntries?startWith=B">B</a> <a id="C" href="/ManageEntries?startWith=C">
+                        C</a> <a id="D" href="/ManageEntries?startWith=D">D</a> <a id="Đ" href="/ManageEntries?startWith=Đ">
+                            Đ</a> <a id="E" href="/ManageEntries?startWith=E">E</a> <a id="G" href="/ManageEntries?startWith=G">
+                                G</a> <a id="H" href="/ManageEntries?startWith=H">H</a> <a id="I" href="/ManageEntries?startWith=I">
+                                    I</a> <a id="J" href="/ManageEntries?startWith=J">J</a> <a id="K" href="/ManageEntries?startWith=K">
+                                        K</a> <a id="L" href="/ManageEntries?startWith=L">L</a>
+                <a id="M" href="/ManageEntries?startWith=M">M</a> <a id="N" href="/ManageEntries?startWith=N">
+                    N</a> <a id="O" href="/ManageEntries?startWith=O">O</a> <a id="P" href="/ManageEntries?startWith=P">
+                        P</a> <a id="Q" href="/ManageEntries?startWith=Q">Q</a> <a id="R" href="/ManageEntries?startWith=R">
+                            R</a> <a id="S" href="/ManageEntries?startWith=S">S</a> <a id="T" href="/ManageEntries?startWith=T">
+                                T</a> <a id="U" href="/ManageEntries?startWith=U">U</a> <a id="V" href="/ManageEntries?startWith=V">
+                                    V</a> <a id="W" href="/ManageEntries?startWith=W">W</a> <a id="X" href="/ManageEntries?startWith=X">
+                                        X</a> <a id="Y" href="/ManageEntries?startWith=Y">Y</a>
+                <a id="Z" href="/ManageEntries?startWith=Z">Z</a>
+                @if (Request.QueryString["startWith"] != null)
+                {
+                    <script type="text/javascript">
+                    $(document).ready(function () { 
+                            $("#@Request.QueryString["startWith"]").css( "font-weight", "bold" ).css("font-size","16px");
+                    });
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $("#all").css("font-weight", "bold").css("font-size", "16px");
+                        });
+                    </script>
+                          
+                }
+            </div>
+        </div>
+    </div>
+    <div class="span span12">
+        <div class="block block-sumary">
+            <div class="sumary">
+                <form action="/ManageEntries" method="get">
+                <label>
+                    Tìm kiếm</label>
+                <input name="keyword" type="text" style="margin-right: 5px;" /><input class="btn"
+                    type="submit" value="Tìm" />
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="span span12">
+        <div class="head">
+            <div class="icm-list">
+            </div>
+            @if (@Request.QueryString["startWith"] != null)
+            {
+                <h1>
+                    Danh sách thuật ngữ bắt đầu với "@Request.QueryString["startWith"]"</h1>
+            }
+            else
+            { 
+                <h1>
+                    Danh sách tất cả thuật ngữ</h1>
+            }
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block">
+            <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                <thead>
+                    <tr>
+                        <th width="5%">
+                            STT
+                        </th>
+                        <th width="15%">
+                            Thuật ngữ
+                        </th>
+                        <th width="7%">
+                            Loại từ
+                        </th>
+                        <th width="25%">
+                            Giải thích
+                        </th>
+                        <th width="18%">
+                            Từ đồng nghĩa
+                        </th>
+                        <th width="20%">
+                            Ví dụ
+                        </th>
+                        <th width="10%">
+                            <center>
+                                Thao tác</center>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var count = 1;
+
+                        string page1 = String.IsNullOrEmpty(Request.QueryString["page"]) ? "1" : Request.QueryString["page"];
+
+                        var pageNumber = Int32.Parse(page1);
+
+                        count = (pageNumber - 1) * ViewBag.Size + 1;
+                    }
+                    @foreach (var item in Model.AllEntries)
+                    {
+                        if (item.Synsets.Count < 1)
+                        { 
+                        <tr>
+                            <td>
+                                @count
+                            </td>
+                            <td>
+                                <b>@item.HeadWord</b>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td>
+                            </td>
+                            <td align="center">
+                                <a style="margin-right: 5px" class="btn-edit" title="Sửa" href="#"></a><a class="btn-delete synset-delete"
+                                    href="#" title="Xóa">
+                                    <input type="hidden" value="173" />
+                                </a>
+                            </td>
+                        </tr>
+                          
+                        }
+                        else
+                        {
+                            foreach (var t in item.Synsets)
+                            {
+                                
+                        <tr>
+                            <td>
+                                @count
+                            </td>
+                            <td>
+                                <b>@item.HeadWord</b>
+                            </td>
+                            <td>
+                                @if (t.Category.Equals("n"))
+                                { <span>Danh từ</span> }
+                                else if (t.Category.Equals("v"))
+                                { <span>Động từ</span> }
+                                else
+                                { <span>Tính từ</span> }
+                            </td>
+                            <td>
+                                @t.Def
+                            </td>
+                            <td>
+                                @foreach (var str in t.WordIndexes)
+                                {
+                                    if (!str.HeadWord.Equals(item.HeadWord))
+                                    {                                        
+                                    <span class="synset-item">@str.HeadWord</span>                                    
+                                    }
+                                }
+                                <script>                                    $("span").last().removeClass('synset-item');</script>
+                            </td>
+                            <td>
+                                @t.Exa
+                            </td>
+                            <td align="center">
+                                <a style="margin-right:5px" class="btn-edit" title="Sửa" href="/ManageEntries/Edit?synsetId=@t.SynsetId&headWord=@item.HeadWord">
+                                </a><a class="btn-delete synset-delete" data-index="@item.HeadWord" data-synset="@t.SynsetId" href="javascript:" title="Xóa">
+                                    
+                                </a>
+                            </td>
+                        </tr>
+                          
+                            }
+                        }
+                        count++;
+                    }
+                </tbody>
+            </table>
+            <div class="view-more">
+                @Html.PagedListPager((IPagedList)Model.AllEntries, page => Url.Action("Index", new { page = page, startWith = Request.QueryString["startWith"], keyword = Request.QueryString["keyword"] }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })</div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+</div>

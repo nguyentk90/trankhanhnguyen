@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <script src="@Url.Content("~/Scripts/admin.js")" type="text/javascript"></script>
+    <script src="@Url.Content("~/Scripts/jquery.form.js")" type="text/javascript"></script>
+    <link href="@Url.Content("~/Content/Admin.css")" rel="stylesheet" type="text/css"/>
+}
+@section Header {
+    <div id="header-bar">
+        <ul id="menu">
+            <li class="home-icon"><a href="@Url.Content("~/Home")">Trang chủ</a> </li>
+            @Html.Partial("_LogOnPartial")
+        </ul>
+    </div>
+}
+<script type="text/javascript">
+    $(document).ready(function () {
+        /* LEFT SIDE DATEPICKER */
+        $("#menuDatepicker").datepicker();
+    });
+</script>
+<div class="menu">
+    <div class="breadLine">
+        <div class="arrow">
+        </div>
+        <div class="title-admin">
+            QUẢN TRỊ HỆ THỐNG
+        </div>
+    </div>
+    <ul class="navigation">
+        <li id="Index"><a href="/Admin"><span class="isw-grid"></span><span class="text">Tổng
+            quan</span> </a></li>
+        <li id="ManageEntries"><a href="/ManageEntries"><span class="isw-list"></span><span
+            class="text">Thuật ngữ</span> </a></li>
+        <li id="Users"><a href="/Users"><span class="isw-user"></span><span class="text">Thành
+            viên</span> </a></li>
+        <li id="ManageSearchHistory"><a href="/ManageSearchHistory"><span class="isw-zoom"></span>
+            <span class="text">Thống kê tra cứu</span> </a></li>
+        <li id="QA"><a href="/QA"><span class="isw-chats"></span><span class="text">Hỏi đáp</span>
+        </a></li>
+        <li id="Comment"><a href="/Comment"><span class="isw-chat"></span><span class="text">
+            Bình luận</span> </a></li>
+        <li id="ManageContent"><a href="/ManageContent"><span class="isw-plus"></span><span
+            class="text">Nội dung đóng góp</span> </a></li>
+        <li id="Import"><a href="/Import"><span class="isw-sync"></span><span class="text">Nhập
+            dữ liệu thuật ngữ</span> </a></li>
+    </ul>
+    <div class="dr">
+        <span></span>
+    </div>
+    <div class="widget-fluid">
+        <div id="menuDatepicker">
+        </div>
+    </div>
+</div>
+<div class="content-admin">
+    <div class="breadLine">
+        <div class="arrow">
+        </div>
+        <div class="title-admin">
+            HỆ THỐNG TRA CỨU THUẬT NGỮ HÀNH CHÍNH VĂN PHÒNG VÀ HOẠT ĐỘNG XÃ HỘI
+        </div>
+    </div>
+    <div class="workplace">
+        @RenderBody()
+    </div>
+</div>
+@Html.Partial("_LoadingPopUp")
+@section Footer {
+}

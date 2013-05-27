@@ -1,0 +1,193 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="TraCuuThuatNguModelStoreContainer" CdmEntityContainer="TraCuuThuatNguEntities">
+    <EntitySetMapping Name="aspnet_Users">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.aspnet_Users">
+        <MappingFragment StoreEntitySet="aspnet_Users">
+          <ScalarProperty Name="LastActivityDate" ColumnName="LastActivityDate" />
+          <ScalarProperty Name="IsAnonymous" ColumnName="IsAnonymous" />
+          <ScalarProperty Name="MobileAlias" ColumnName="MobileAlias" />
+          <ScalarProperty Name="LoweredUserName" ColumnName="LoweredUserName" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Comments">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.Comment">
+        <MappingFragment StoreEntitySet="Comment">
+          <ScalarProperty Name="Reported" ColumnName="Reported" />
+          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="CmContent" ColumnName="CmContent" />
+          <ScalarProperty Name="HeadWord" ColumnName="HeadWord" />
+          <ScalarProperty Name="CommentId" ColumnName="CommentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Favorites">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.Favorite">
+        <MappingFragment StoreEntitySet="Favorite">
+          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="HeadWord" ColumnName="HeadWord" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SearchHistories">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.SearchHistory">
+        <MappingFragment StoreEntitySet="SearchHistory">
+          <ScalarProperty Name="DateModify" ColumnName="DateModify" />
+          <ScalarProperty Name="Counter" ColumnName="Counter" />
+          <ScalarProperty Name="IsExist" ColumnName="IsExist" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Tests">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.Test">
+        <MappingFragment StoreEntitySet="Test">
+          <ScalarProperty Name="TestName" ColumnName="TestName" />
+          <ScalarProperty Name="TestId" ColumnName="TestId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Topics">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.Topic">
+        <MappingFragment StoreEntitySet="Topic">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="TopicId" ColumnName="TopicId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Profiles">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.Profile">
+        <MappingFragment StoreEntitySet="Profile">
+          <ScalarProperty Name="Birthday" ColumnName="Birthday" />
+          <ScalarProperty Name="Fullname" ColumnName="Fullname" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserContents">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.UserContent">
+        <MappingFragment StoreEntitySet="UserContent">
+          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+          <ScalarProperty Name="Exa" ColumnName="Exa" />
+          <ScalarProperty Name="Def" ColumnName="Def" />
+          <ScalarProperty Name="Catagory" ColumnName="Catagory" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+          <ScalarProperty Name="UserContentId" ColumnName="UserContentId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="WordIndexes">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.WordIndex">
+        <MappingFragment StoreEntitySet="WordIndex">
+          <ScalarProperty Name="WordType" ColumnName="WordType" />
+          <ScalarProperty Name="HeadWord" ColumnName="HeadWord" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UserHistories">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.UserHistory">
+        <MappingFragment StoreEntitySet="UserHistory">
+          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+          <ScalarProperty Name="HistoryId" ColumnName="HistoryId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Membership">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.aspnet_Membership">
+        <MappingFragment StoreEntitySet="aspnet_Membership">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptWindowStart" ColumnName="FailedPasswordAnswerAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAnswerAttemptCount" ColumnName="FailedPasswordAnswerAttemptCount" />
+          <ScalarProperty Name="FailedPasswordAttemptWindowStart" ColumnName="FailedPasswordAttemptWindowStart" />
+          <ScalarProperty Name="FailedPasswordAttemptCount" ColumnName="FailedPasswordAttemptCount" />
+          <ScalarProperty Name="LastLockoutDate" ColumnName="LastLockoutDate" />
+          <ScalarProperty Name="LastPasswordChangedDate" ColumnName="LastPasswordChangedDate" />
+          <ScalarProperty Name="LastLoginDate" ColumnName="LastLoginDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="IsLockedOut" ColumnName="IsLockedOut" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="PasswordAnswer" ColumnName="PasswordAnswer" />
+          <ScalarProperty Name="PasswordQuestion" ColumnName="PasswordQuestion" />
+          <ScalarProperty Name="LoweredEmail" ColumnName="LoweredEmail" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="MobilePIN" ColumnName="MobilePIN" />
+          <ScalarProperty Name="PasswordSalt" ColumnName="PasswordSalt" />
+          <ScalarProperty Name="PasswordFormat" ColumnName="PasswordFormat" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="aspnet_Roles">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.aspnet_Roles">
+        <MappingFragment StoreEntitySet="aspnet_Roles">
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="LoweredRoleName" ColumnName="LoweredRoleName" />
+          <ScalarProperty Name="RoleName" ColumnName="RoleName" />
+          <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+          <ScalarProperty Name="ApplicationId" ColumnName="ApplicationId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="aspnet_UsersInRoles" TypeName="TraCuuThuatNguModel.aspnet_UsersInRoles" StoreEntitySet="aspnet_UsersInRoles">
+      <EndProperty Name="aspnet_Users">
+        <ScalarProperty Name="UserId" ColumnName="UserId" />
+      </EndProperty>
+      <EndProperty Name="aspnet_Roles">
+        <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Synsets">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.Synset">
+        <MappingFragment StoreEntitySet="Synset">
+          <ScalarProperty Name="Exa" ColumnName="Exa" />
+          <ScalarProperty Name="Def" ColumnName="Def" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="SynsetId" ColumnName="SynsetId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="Relation" TypeName="TraCuuThuatNguModel.Relation" StoreEntitySet="Relation">
+      <EndProperty Name="Synset">
+        <ScalarProperty Name="SynsetId" ColumnName="SynsetId" />
+      </EndProperty>
+      <EndProperty Name="WordIndex">
+        <ScalarProperty Name="HeadWord" ColumnName="HeadWord" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="Answers">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.Answer">
+        <MappingFragment StoreEntitySet="Answer">
+          <ScalarProperty Name="Reported" ColumnName="Reported" />
+          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="AContent" ColumnName="AContent" />
+          <ScalarProperty Name="AnswerId" ColumnName="AnswerId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Questions">
+      <EntityTypeMapping TypeName="TraCuuThuatNguModel.Question">
+        <MappingFragment StoreEntitySet="Question">
+          <ScalarProperty Name="Reported" ColumnName="Reported" />
+          <ScalarProperty Name="DateModify" ColumnName="DateModify" />
+          <ScalarProperty Name="DateAdd" ColumnName="DateAdd" />
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="QContent" ColumnName="QContent" />
+          <ScalarProperty Name="QuestionId" ColumnName="QuestionId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

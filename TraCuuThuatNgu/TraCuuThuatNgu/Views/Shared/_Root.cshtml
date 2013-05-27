@@ -1,0 +1,50 @@
+﻿@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@section Styles {
+    <link href="@Url.Content("~/Content/Root.css")" rel="stylesheet" type="text/css"/>
+     <script src="@Url.Content("~/Scripts/like.js")" type="text/javascript"></script>
+
+}
+@section Header {
+    <div id="header-bar-root">
+        <ul id="menu">
+            <li class="home-icon"><a href="@Url.Content("~/Home")">Trang chủ</a> </li>
+            @Html.Partial("_LogOnPartial")
+        </ul>
+    </div>
+}
+<div id="header-root">
+    <div id="logo-root">
+        <a title="Trang chủ" href="/Home"><img src="../../Content/img/logo4.png" alt="Tra cứu thuật ngữ" /></a>
+    </div>
+    <div id="input-search-root">
+    
+        <form class="form-wrapper-mini cf" id="search-form" action="/Result">
+        @if (Request.Params["keyword"].IsEmpty())
+        {
+            <input type="text" name="keyword" id="search-input" placeholder="Nhập thuật ngữ..."/>
+        }
+        else
+        {
+            <input type="text" name="keyword"  id="search-input" value='@Request.Params["keyword"]' placeholder="Nhập thuật ngữ..."/>
+        }
+        
+        <button type="submit">
+            Tra cứu</button>        
+        </form>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+<div class="dr">
+    <span></span>
+</div>
+<div id="main-root" class="box">
+    @RenderBody()
+</div>
+@section Footer {
+    <div id="footer-info-root">
+        <a href="#">Liên hệ</a> <a href="#">Giới thiệu</a> <a href="#">Phát triển</a>
+    </div>
+}

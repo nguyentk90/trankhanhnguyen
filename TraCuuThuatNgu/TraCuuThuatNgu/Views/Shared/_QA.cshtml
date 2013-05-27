@@ -1,0 +1,305 @@
+﻿@model IEnumerable<TraCuuThuatNgu.Models.Question>
+<style type="text/css">
+    .wrap-qa
+    {
+        width: 300px;
+        padding: 5px 10px;
+    }
+    .wrap-qa .dr
+    {
+        margin-bottom: 0px !important;
+    }
+    
+    .input-question
+    {
+    }
+    
+    .question-item
+    {
+    }
+    
+    .question-item
+    {
+        margin-top: 3px;
+    }
+    
+    .question-item .date
+    {
+        float: right;
+        font-size: 11px;
+        color: #9b9b9b;
+    }
+    
+    .question-item p
+    {
+        padding: 2px 5px;
+        margin: 0px;
+    }
+    .input-question
+    {
+        text-align: right;
+    }
+    .input-question textarea
+    {
+        padding: 5px;
+        width: 285px;
+        min-height: 50px;
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        font-size: 13px;
+    }
+    
+    .question-item-content
+    {
+        border: 1px solid #ccc;
+        border-radius: 6px;
+        margin-bottom: 2px;
+        background-color: #fff;
+    }
+    
+    .question-item-content .username
+    {
+        background: url('/Content/img/icons/Help-icon.png') left center no-repeat transparent;
+        padding-left: 18px;
+        font-weight: bold;
+        color: #666;
+    }
+    
+    .btn-answer
+    {
+        background: url('/Content/img/icons/edit-icon.png') left center no-repeat transparent;
+        padding-left: 18px;
+    }
+    
+    .answer-list
+    {
+        margin-left: 26px; /*border: 1px solid #ccc;*/
+        border-radius: 6px;
+    }
+    
+    .answer-item
+    {
+        border-right: 1px solid #ccc;
+        border-left: 1px solid #ccc;
+        border-bottom: 1px solid #ccc;
+        margin-bottom: 0px;
+        background-color: #fff;
+    }
+    .answer-item p
+    {
+        padding: 2px 5px;
+    }
+    .answer-item:nth-last-child(1)
+    {
+        border-bottom: 1px solid #ccc;
+        border-bottom-left-radius: 6px;
+        border-bottom-right-radius: 6px;
+    }
+    .answer-item:first-child
+    {
+        border-top: 1px solid #ccc;
+        border-top-left-radius: 6px;
+        border-top-right-radius: 6px;
+    }
+    .answer-item .username-a
+    {
+        /*background: url('/Content/img/icons/speech-balloon-green-a-icon.png') left center no-repeat transparent;*/ /*padding-left: 18px;*/
+        font-weight: bold;
+        color: #000;
+    }
+    
+    .btn-showmore
+    {
+        padding: 3px 30px;
+        border-radius: 2px;
+        background-color: #D3D3D3;
+        border: 1px solid #ccc;
+    }
+</style>
+<!--Add script to update the page and send messages.-->
+@*<script type="text/javascript">
+
+    $(function () {
+        // Declare a proxy to reference the hub. 
+        var chat = $.connection.chatHub;
+        // Create a function that the hub can call to broadcast messages.
+
+        chat.client.newQuestion = function (username, content, type, qid) {
+
+//            $('.question-list').prepend('<div class="question-item">'
+//                                + '<div class="question-item-content">'
+//                                    + '<p>'
+//                                        + '<span class="username">' + username + '</span><span class="date">11/11</span></p>'
+//                                    + '<p>'
+//                                        + content + '</p>'
+//                                    + '<p style="text-align: right">'
+//                                        + '<a class="btn-answer" href="#">Trả lời</a></p>'
+//                                + '</div>'
+//                                + '<div id="q-' + qid + '" class="answer-list">'
+//                                + '</div>'
+            //                            + '</div>');
+           
+
+        };
+
+      
+        chat.client.newAnswer = function (name, message, type, qid) {
+
+            //                if (type != 'Q') {
+            //                    var count = $('#answers_' + qid + ' li').size();
+            //                    if (count > 3)
+            //                        var myvar = count - 4;
+            //                    //$('#answers_' + qid + ' li').hide();
+            //                    $('#answers_' + qid + ' li').filter(':lt(' + myvar + ')').hide();
+            //                    $('#answers_' + qid).append('<li>' + message + $('#answers_' + qid + ' li').size() + '</li>');
+
+            //                } else {
+            //                    // Html encode display name and message. 
+            //                    var encodedName = $('<div />').text(name).html();
+            //                    var encodedMsg = $('<div />').text(message).html();
+            //                    // Add the message to the page. 
+            //                    $('#discussion').prepend('<li id="' + qid + '" class="question_item">'
+            //                + '<div class="content">'
+            //                    + message
+            //                + '</div>'
+            //                + '<p><a class="showall" data-value="' + qid + '" href="javascript:">show all</a></p>'
+            //                + '<ul id="answers_' + qid + '">'
+
+            //                + '</ul>'
+            //                + '<div class="asw_input">'
+            //                        + '<input type="text" />'
+            //                        + '<input type="hidden" value="' + qid + '" />'
+            //                        + '<input type="button" class="sendanswer" value="Answer" name="' + qid + '" />'
+            //                + '</div>'
+            //            + '</li>'
+
+            //            );
+            //                }
+        };
+
+
+        $(".btn-answer").live('click', function () {
+
+        });
+
+
+        // Start the connection.
+        $.connection.hub.start().done(function () {
+            $('#sendquestion').click(function () {
+                alert("Bạn chưa nhập nội dung1.");
+                //                var checkBlank = $("#questioncontent").val();
+                //                if ($.trim(checkBlank) == '') {
+                //                    alert("Bạn chưa nhập nội dung.");
+                //                    $("#questioncontent").focus();
+                //                } else {
+                //                    // Call the Send method on the hub. 
+                //                    chat.server.send('', $('#questioncontent').val(), "Q", 0);
+                //                    // Clear text box and reset focus for next comment. 
+                //                    //$('#message').val('').focus();
+                //                }
+            });
+
+            //                        $(".sendanswer").live('click', function () {
+            //                            var answer_text = $(this).siblings('input:text').val();
+            //                            var qid = $(this).siblings('input:hidden').val();
+            //                            chat.server.send($('#displayname').val(), answer_text, "A", qid);
+            //                        });
+
+
+        });
+
+
+        $("#sendquestion").click(function () {
+            alert("Bạn chưa nhập nội dung.");
+            //            $('.question-list').prepend('<div class="question-item">'
+            //                                + '<div class="question-item-content">'
+            //                                    + '<p>'
+            //                                        + '<span class="username">aa</span><span class="date">11/11</span></p>'
+            //                                    + '<p>'
+            //                                        + 'noidung</p>'
+            //                                    + '<p style="text-align: right">'
+            //                                        + '<a class="btn-answer" href="#">Trả lời</a></p>'
+            //                                        + '<div class="answer-input">'
+            //                                            + '<textarea></textarea>'
+            //                                            + '<input type="button" data-qid="" value="Trả lời" />'
+            //                                        + '</div>'
+            //                                + '</div>'
+            //                                + '<div class="answer-list">'
+
+            //                                + '</div>'
+            //                            + '</div>');
+        });
+
+    });
+</script>*@
+<script type="text/javascript">
+     $(function () {
+         // Reference the auto-generated proxy for the hub.  
+         var chat = $.connection.chatHub;
+         // Create a function that the hub can call back to display messages.
+         chat.client.broadcastMessage = function (message) {
+             // Add the message to the page. 
+             alert(message);
+         };
+         // Get the user name and store it to prepend to messages.
+
+         // Set initial focus to message input box.  
+
+         // Start the connection.
+         $.connection.hub.start().done(function () {
+             $('#sendquestion').click(function () {
+                 // Call the Send method on the hub. 
+                 chat.server.send('afd');
+                 // Clear text box and reset focus for next comment. 
+
+             });
+         });
+     });
+     // This optional function html-encodes messages for display in the page.
+     function htmlEncode(value) {
+         var encodedValue = $('<div />').text(value).html();
+         return encodedValue;
+     }
+</script>
+<div class="wrap-qa">
+    <div class="input-question">
+        <textarea id="questioncontent" placeholder="Nhập câu hỏi..."></textarea>
+        <input type="button" class="btn" id="sendquestion" value="Gửi" />
+    </div>
+    <div class="dr">
+        <span></span>
+    </div>
+    <div class="question-list">
+        @foreach (var item in Model)
+        {
+            <div class="question-item">
+                <div class="question-item-content">
+                    <p>
+                        <span class="username">@item.aspnet_Users.UserName</span><span class="date">@item.DateAdd</span></p>
+                    <p>
+                        @item.QContent</p>
+                    <p style="text-align: right">
+                        <a class="btn-answer" href="#">Trả lời</a></p>
+                    @* <div class="answer-input">
+                        <textarea></textarea>
+                        <input type="button" data-qid="@item.QuestionId" value="Trả lời" />
+                    </div>*@
+                </div>
+                <div class="answer-list">
+                    @foreach (var an in item.Answers)
+                    {
+                        <div class="answer-item">
+                            <p>
+                                <span class="username-a">@an.aspnet_Users.UserName</span><span class="date">@an.DateAdd</span></p>
+                            <p>
+                                @an.AContent</p>
+                        </div>                   
+                    }
+                </div>
+            </div>        
+        }
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="#" class="btn-showmore">Xem thêm</a>
+        </div>
+    </div>
+</div>
