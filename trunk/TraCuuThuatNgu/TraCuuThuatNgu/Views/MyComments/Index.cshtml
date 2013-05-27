@@ -1,0 +1,77 @@
+﻿@{
+    ViewBag.Title = "Bình luận của tôi";
+    Layout = "~/Views/Shared/_Root.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+
+<div class="span span9-account">
+    <div class="head">
+        <div class="icm-user">
+        </div>
+        <h1>
+            Thông tin tài khoản</h1>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="block">
+        <ul class="simple-menu">
+            <li><a href="/Account/Info">Thông tin tài khoản</a> </li>
+            <li><a href="/Account/ChangePassword">Đổi mật khẩu</a> </li>
+            <li><a href="/AddContent">Đóng góp của tôi</a> </li>
+            <li class="active"><a class="active" href="/MyComments">Bình luận của tôi</a> </li>
+            <li><a href="/UserHistory">Lịch sử tra cứu</a> </li>
+            <li><a href="/Like">Yêu thích</a> </li>
+        </ul>
+    </div>
+</div>
+<div class="span span8-account">
+    <div class="head">
+        <div class="icm-chat">
+        </div>
+        <h1>
+            Danh sách bình luận</h1>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="block">
+        <table cellpadding="0" cellspacing="0" width="100%" class="table">
+            <thead>
+                <tr>
+                    <th width="50%">
+                        Nội dung
+                    </th>
+                    <th width="25%">
+                        Thuật ngữ
+                    </th>
+                    <th width="25%">
+                        Thêm lúc
+                    </th>                    
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in ViewBag.MyComments)
+                {
+                    <tr>
+                        <td>
+                            @item.CmContent
+                        </td>
+                        <td>
+                            <span class="keyword-history"><a href="/Result?keyword=@item.HeadWord">@item.HeadWord</a></span>
+                        </td>
+                        <td>
+                            @String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)
+                        </td>
+                        
+                    </tr>
+                }
+            </tbody>
+        </table>
+        <div class="view-more">
+            @Html.PagedListPager((IPagedList)ViewBag.MyComments, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })
+        <div class="clear">
+        </div>
+    </div>
+</div>
+<div class="clear">
+</div>

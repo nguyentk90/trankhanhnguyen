@@ -1,0 +1,82 @@
+﻿@model TraCuuThuatNgu.ViewModels.CommentsViewModel
+@{
+    ViewBag.Title = "Quản lý bình luận";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<style type="text/css">
+    #Comment
+    {
+        border-color: #143D6B;
+        background: url("/Content/img/backgrounds/menu-item-active.jpg") left top repeat-x;
+    }
+</style>
+<div class="row-fluid">
+    <h2>
+        Quản lý bình luận của thành viên</h2>
+    <div class="dr">
+        <span></span>
+    </div>
+    
+    <div class="span span12">
+        <div class="head">
+            <div class="icm-chats">
+            </div>
+            <h1>
+                Danh sách bình luận</h1>   
+                <div class="clear"></div>         
+        </div>
+        <div class="block">
+            <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                <thead>
+                    <tr>
+                        <th width="10%">
+                            Người dùng
+                        </th>
+                        <th width="40%">
+                            Nội dung
+                        </th>
+                        <th width="20%">
+                            Thuật ngữ
+                        </th>
+                        <th width="20%">
+                            Thời gian
+                        </th>
+                        <th width="10%">
+                           <center>Thao tác</center> 
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Comments)
+                    {
+                        <tr>
+                            <td>
+                                @item.aspnet_Users.UserName
+                            </td>
+                            <td>
+                                @item.CmContent
+                            </td>
+                            <td>
+                                <a href="/ManageEntries/Edit?headWord=@item.HeadWord">@item.HeadWord</a>
+                            </td>
+                            <td>
+                                @String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)
+                            </td>
+                            <td align="center">
+                               <a class="btn-delete btn-comment-delete" href="#" title="Xóa" >
+                                    <input type="hidden" value="@item.CommentId" />
+                               </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="view-more">
+                @Html.PagedListPager((IPagedList)Model.Comments, page => Url.Action("Index", new { page = page, orderby = Request.QueryString["orderby"] }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })</div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+</div>

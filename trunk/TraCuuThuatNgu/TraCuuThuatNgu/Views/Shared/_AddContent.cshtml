@@ -1,0 +1,61 @@
+﻿<div id="add-content-popup" class="ui-dialog">
+    @*<div class="close-button">
+        <a href="#" class="close-popup">
+            <img src="@Url.Content("~/Content/img/icons/bb/ic_cancel.png")" alt="Tra cứu thuật ngữ" />
+        </a>
+    </div>*@    
+    <div class="logon-wapper add-content">
+        <div class="add-content-title">
+            <h2>
+               Đóng góp cho từ "<span id="keyword">@Request.QueryString["keyword"]</span>"</h2>
+        </div>                       
+            <div class="entry-form add-content-form">
+                    <div class="editor">
+                        <div class="editor-label">
+                           Loại từ
+                        </div>
+                        <div class="editor-field">
+                            <select id="catagory">
+                                <option value="n">Danh từ</option>
+                                <option value="v">Động từ</option>
+                                <option value="a">Tính từ</option>
+                            </select>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>                    
+                    <div class="editor">
+                        <div class="editor-label">
+                            Giải thích
+                        </div>
+                        <div class="editor-field">
+                            <textarea id="def" class="text"></textarea>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="editor">
+                        <div class="editor-label">
+                            Ví dụ
+                        </div>
+                        <div class="editor-field">
+                            <textarea id="exa" class="text"></textarea>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                    <div class="editor">
+                        <div class="editor-label">
+                        </div>
+                        <div class="editor-field">
+                            <input type="submit" id="add-content-submit" class="btn" value="Thêm" />
+                            <a id="add-content-close"  class="btn-link">Đóng</a>
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                </div>      
+    </div>    
+</div>
+<div class="ui-widget-overlay">
+</div>

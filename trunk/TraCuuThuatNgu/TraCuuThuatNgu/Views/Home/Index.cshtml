@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Trang chủ";
+}
+@section Header {
+    <div id="header-bar">
+        <ul id="menu">
+            <li class="home-icon"><a href="@Url.Content("~/Home")">Trang chủ</a> </li>
+            @Html.Partial("_LogOnPartial")
+        </ul>
+    </div>
+}
+<div id="home-search">
+    <div id="logo">
+        <img src="../../Content/img/logo4.png" alt="Tra cứu thuật ngữ" />
+    </div>
+    <div id="input-search">
+        <form action="/Result" method="get" id="search-form" class="form-wrapper cf">
+        <input type="text" id="search-input" name="keyword" placeholder="Nhập thuật ngữ..."/>
+        <button type="submit">
+            Tra cứu</button>
+        </form>
+    </div>
+    <div id="extra-infor">
+        <p>
+            Hệ thống tra cứu thuật ngữ hành chính văn phòng và hoạt động xã hội.</p>
+    </div>
+</div>
+
+@section Footer {
+    <div class="footer-info">
+        <a href="#">Hướng dẫn sử dụng</a> <a href="#">Giới thiệu</a> <a href="#">Phát triển</a>
+    </div>
+}

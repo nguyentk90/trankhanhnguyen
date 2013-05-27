@@ -1,0 +1,95 @@
+﻿@model TraCuuThuatNgu.ViewModels.AddContentViewModel
+@{
+    ViewBag.Title = "Quản lý đóng góp nội dung của thành viên";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<style type="text/css">
+    #ManageContent
+    {
+        border-color: #143D6B;
+        background: url("/Content/img/backgrounds/menu-item-active.jpg") left top repeat-x;
+    }
+</style>
+<div class="row-fluid">
+    <h2>
+        Quản lý đóng góp nội dung của thành viên</h2>
+    <div class="dr">
+        <span></span>
+    </div>
+    
+    <div class="span span12">
+        <div class="head">
+            <div class="icm-chats">
+            </div>
+            <h1>
+                Danh sách nội dung đóng góp</h1>   
+                <div class="clear"></div>         
+        </div>
+        <div class="block">
+            <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                <thead>
+                    <tr>                                             
+                        <th width="10%">
+                            Thuật ngữ
+                        </th>
+                        <th width="30%">
+                            Giải thích
+                        </th>
+                        <th width="10%">
+                            Loại từ
+                        </th>
+                        <th width="20%">
+                            Ví dụ
+                        </th>
+                        <th width="10%">
+                            Người đăng
+                        </th>   
+                        <th width="10%">
+                            Thời gian
+                        </th>
+                        <th width="10%">
+                           <center>Thao tác</center> 
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.UserContents)
+                    {
+                        <tr>
+                            <td>
+                               <b>@item.Keyword</b>
+                            </td>
+                            <td>
+                                @item.Def
+                            </td>
+                            <td>
+                                @if (item.Catagory.Equals("n"))
+                                { <span>Danh từ</span> }
+                                else if (item.Catagory.Equals("v"))
+                                { <span>Động từ</span> }
+                                else
+                                { <span>Tính từ</span> }
+                            </td>
+                            <td>@item.Exa</td>
+                            <td>@item.aspnet_Users.UserName</td>
+                            <td>
+                                @String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)
+                            </td>
+                            <td align="center">
+                               <a class="btn-delete btn-add-content" href="#" title="Xóa" >
+                                    <input type="hidden" value="@item.UserContentId" />
+                               </a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+            <div class="view-more">
+                @Html.PagedListPager((IPagedList)Model.UserContents, page => Url.Action("Index", new { page = page, orderby = Request.QueryString["orderby"] }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })</div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+</div>

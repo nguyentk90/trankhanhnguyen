@@ -1,0 +1,310 @@
+﻿body
+{
+    background: url("img/backgrounds/body.jpg") left top repeat;
+}
+#main
+{
+    width: 100%;
+    background-color: transparent;
+    padding: 0px;
+}
+header, #header
+{
+    background: url("img/backgrounds/header.jpg") left top repeat;
+}
+
+footer, #footer
+{
+    position: relative;
+}
+
+/*Main menu*/
+.menu
+{
+    display: block;
+    width: 219px;
+    position: absolute;
+    margin-top: 0px; /*z-index: 999;*/
+    background: url("img/backgrounds/menu.jpg") left top repeat;
+    border-bottom: 1px solid #CCCCCC;
+    -webkit-border-bottom-left-radius: 3px;
+    -webkit-border-bottom-left-radius: 3px;
+    -moz-border-bottom-left-radius: 3px;
+    -moz-border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    border-bottom-right-radius: 3px;
+    -moz-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.35);
+    -webkit-box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.35);
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.35);
+}
+
+.navigation
+{
+    list-style: none;
+    position: relative;
+    padding: 0px;
+    margin: 0px;
+    float: left;
+}
+.navigation li
+{
+    border-top: 1px solid #335A85;
+    border-right: 1px solid #335A85;
+    background: url("img/backgrounds/menu-item.jpg") left top repeat-x;
+    padding: 0px;
+    margin: 0px;
+    display: block;
+    float: left;
+    width: 219px;
+    position: relative;
+    line-height: 20px;
+}
+.navigation li > a span.text
+{
+    width: 183px;
+    padding: 9px 0px;
+    display: block;
+    margin-left: 10px;
+    float: left;
+    overflow: hidden;
+    color: White;
+}
+.menu .navigation li:hover, .menu .navigation li.active
+{
+    border-color: #143D6B;
+    background: url("img/backgrounds/menu-item-active.jpg") left top repeat-x;
+}
+
+.isw-grid
+{
+    background: url('img/icons/ws/ic_grid.png') center center no-repeat transparent;
+}
+
+.isw-user
+{
+    background: url('img/icons/ws/ic_user.png') center center no-repeat transparent;
+}
+.isw-list
+{
+    background: url('img/icons/ws/ic_list.png') center center no-repeat transparent;
+}
+.isw-zoom
+{
+    background: url('img/icons/ws/ic_zoom.png') center center no-repeat transparent;
+}
+.isw-list
+{
+    background: url('img/icons/ws/ic_list.png') center center no-repeat transparent;
+}
+.isw-chat
+{
+    background: url('img/icons/ws/ic_chat.png') center center no-repeat transparent;
+}
+.isw-plus
+{
+    background: url('img/icons/ws/ic_plus.png') center center no-repeat transparent;
+}
+.isw-sync
+{
+    background: url('img/icons/ws/ic_sync.png') center center no-repeat transparent;
+}
+
+.isw-chats
+{
+    background: url('img/icons/ws/ic_chats.png') center center no-repeat transparent;
+}
+[class*="isw-"], [class*="isb-"]
+{
+    margin-left: 10px;
+    padding: 11px 0px;
+    width: 16px;
+    height: 16px;
+    font-size: 14px;
+    font-weight: normal;
+    display: block;
+    float: left;
+}
+.breadLine
+{
+    height: 23px;
+    background: url("img/backgrounds/nav.jpg") left top repeat-x;
+    border-bottom: 1px solid #CCC;
+}
+
+/*date picker*/
+.menu .widget-fluid
+{
+    padding: 0px;
+    width: 219px;
+}
+.menu .widget, .menu .widget-fluid
+{
+    display: block;
+    float: left;
+    width: 200px;
+}
+.ui-datepicker
+{
+    width: 213px;
+}
+/*
+.ui-datepicker .ui-datepicker-header {
+    position: relative;
+    padding: 8px 0 7px 0;
+    border: 0px;
+    font-weight: bold;
+    font-size: 11px;
+    width: 100%;
+    color: #FFF;
+    border-bottom: 1px solid #335A85;
+    border-radius: 0!important;
+    box-shadow: 0 1px 0 #fff;
+    -webkit-box-shadow: 0 1px 0 #fff;
+    -moz-box-shadow: 0 1px 0 #fff;
+    background: url("img/backgrounds/box-head.jpg") left top repeat-x;
+}
+*/
+.content-admin
+{
+    position: relative;
+    margin-left: 220px;
+    padding-top: 0px;
+}
+
+.content-admin .workplace
+{
+    position: relative;
+    padding: 20px;
+}
+
+.title-admin
+{
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    line-height: 22px;
+    color: #666;
+}
+
+.row-fluid
+{
+    width: 100%;
+}
+
+.row-fluid h2
+{
+    margin: 5px 0px;
+    padding: 0px;
+    font-size: 24px;
+}
+
+.row-fluid .first
+{
+    margin-left: 0px;
+}
+
+/*Block for dashboard*/
+.span10
+{
+    width: 49%;
+    margin-left: 2%;
+}
+
+.head
+{
+    background: url("img/backgrounds/box-head.jpg") left top repeat-x;
+}
+
+.span12
+{
+    width: 100%;
+    float: none;
+}
+
+
+/*Sumary*/
+
+.block-sumary
+{
+    border: 1px solid #CCC;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+}
+
+.sumary
+{
+    padding:15px 30px;
+}
+.sumary .sumary-item label
+{
+    width: 162px;
+    text-align: right;
+    display: block;
+    float: left;
+    color: #468847;
+    font-size:13px;
+}
+.sumary .sumary-item span
+{
+    font-size:17px;
+    font-weight:bold;
+    text-align: right;
+    display: block;
+    float: left;
+    margin-left: 10px;
+    color: #3399FF;
+    width:150px;
+}
+
+.sort-control
+{
+    padding:2px 10px 2px 0px;
+    float:right;   
+    color:#fff; 
+}
+
+/* aphab-list */
+.aphab-list a
+{
+    margin-right:10px;
+    text-decoration:underline;    
+}
+
+.synset-item:after
+{
+    content: ",";
+    
+}
+
+/*LIST SYNONYM*/
+#list-synonyms
+{
+    list-style:none; 
+    padding:0;   
+    margin:0;
+    
+}
+#list-synonyms li
+{  
+    display:inline-block;
+    margin-right:6px;
+}
+#list-synonyms a
+{
+    color:#cccccc;
+    margin-left:2px;    
+}
+
+#list-synonyms .label
+{
+    padding-top:3px;    
+    padding-bottom:3px;
+}
+
+/*DETAIL USER*/
+.roles-list
+{
+    list-style:none; 
+    padding-left:0px;
+    margin-top: 5px; 
+}

@@ -1,0 +1,198 @@
+﻿@model TraCuuThuatNgu.ViewModels.EntriesViewModel
+@{
+    Layout = "~/Views/Shared/_Root.cshtml";
+                    //ViewBag.Title = "Kết quả tra cứu";
+}
+@using PagedList.Mvc;
+@using PagedList;
+<div style="float: left; width: 651px">
+    <div class="span span8">
+        <div class="block block-sumary">
+            <div class="sumary aphab-list">
+                <a id="all" href="/Alphabet">Tất cả</a> <a id="A" href="/Alphabet?startWith=A">A</a>
+                <a id="B" href="/Alphabet?startWith=B">B</a> <a id="C" href="/Alphabet?startWith=C">C</a>
+                <a id="D" href="/Alphabet?startWith=D">D</a> <a id="Đ" href="/Alphabet?startWith=Đ">Đ</a>
+                <a id="E" href="/Alphabet?startWith=E">E</a> <a id="G" href="/Alphabet?startWith=G">G</a>
+                <a id="H" href="/Alphabet?startWith=H">H</a> <a id="I" href="/Alphabet?startWith=I">I</a>
+                <a id="J" href="/Alphabet?startWith=J">J</a> <a id="K" href="/Alphabet?startWith=K">K</a>
+                <a id="L" href="/Alphabet?startWith=L">L</a> <a id="M" href="/Alphabet?startWith=M">M</a>
+                <a id="N" href="/Alphabet?startWith=N">N</a> <a id="O" href="/Alphabet?startWith=O">O</a>
+                <a id="P" href="/Alphabet?startWith=P">P</a> <a id="Q" href="/Alphabet?startWith=Q">Q</a>
+                <a id="R" href="/Alphabet?startWith=R">R</a> <a id="S" href="/Alphabet?startWith=S">S</a>
+                <a id="T" href="/Alphabet?startWith=T">T</a> <a id="U" href="/Alphabet?startWith=U">U</a>
+                <a id="V" href="/Alphabet?startWith=V">V</a> <a id="W" href="/Alphabet?startWith=W">W</a>
+                <a id="X" href="/Alphabet?startWith=X">X</a> <a id="Y" href="/Alphabet?startWith=Y">Y</a>
+                <a id="Z" href="/Alphabet?startWith=Z">Z</a>
+                @if (Request.QueryString["startWith"] != null)
+                {
+                    <script type="text/javascript">
+                    $(document).ready(function () { 
+                            $("#@Request.QueryString["startWith"]").css( "font-weight", "bold" ).css("font-size","16px");
+                    });
+                    </script>
+                }
+                else
+                {
+                    <script type="text/javascript">
+                        $(document).ready(function () {
+                            $("#all").css("font-weight", "bold").css("font-size", "16px");
+                        });
+                    </script>
+                          
+                }
+            </div>
+        </div>
+    </div>
+    <div class="span span8">
+        <div class="head">
+            <div class="icm-list">
+            </div>
+            @if (@Request.QueryString["startWith"] != null)
+            {
+                <h1>
+                    Danh sách thuật ngữ bắt đầu với "@Request.QueryString["startWith"]"</h1>
+            }
+            else
+            { 
+                <h1>
+                    Danh sách tất cả thuật ngữ</h1>
+            }
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block">
+            <table cellpadding="0" cellspacing="0" width="100%" class="table">
+                <thead>
+                    <tr>
+                        <th width="5%">
+                            STT
+                        </th>
+                        <th width="15%">
+                            Thuật ngữ
+                        </th>
+                        <th width="10%">
+                            Loại từ
+                        </th>
+                        <th width="35%">
+                            Giải thích
+                        </th>
+                        @*<th width="18%">
+                            Từ đồng nghĩa
+                        </th>*@
+                        <th width="30%">
+                            Ví dụ
+                        </th>
+                        @*<th width="10%">
+                            <center>
+                                Thao tác</center>
+                        </th>*@
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var count = 1;
+
+                        string page1 = String.IsNullOrEmpty(Request.QueryString["page"]) ? "1" : Request.QueryString["page"];
+
+                        var pageNumber = Int32.Parse(page1);
+
+                        count = (pageNumber - 1) * ViewBag.Size + 1;
+                    }
+                    @foreach (var item in Model.AllEntries)
+                    {
+                        foreach (var t in item.Synsets)
+                        {
+                        <tr>
+                            <td>
+                                @count
+                            </td>
+                            <td>
+                                <a href="/Result?keyword=@item.HeadWord"><b>@item.HeadWord</b></a>
+                            </td>
+                            <td>
+                                @if (t.Category.Equals("n"))
+                                { <span>Danh từ</span> }
+                                else if (t.Category.Equals("v"))
+                                { <span>Động từ</span> }
+                                else
+                                { <span>Tính từ</span> }
+                            </td>
+                            <td>
+                                @t.Def
+                            </td>
+                            @*<td>
+                                @foreach (var str in t.WordIndexes)
+                                {
+                                    if (!str.HeadWord.Equals(item.HeadWord))
+                                    {                                        
+                                    <span class="synset-item">@str.HeadWord</span>                                    
+                                    }
+                                }
+                                <script>                                    $("span").last().removeClass('synset-item');</script>
+                            </td>*@
+                            <td>
+                                @t.Exa
+                            </td>
+                            @*<td align="center">
+                                <a style="margin-right:5px" class="btn-edit" title="Sửa" href="/ManageEntries/Edit?synsetId=@t.SynsetId&headWord=@item.HeadWord">
+                                </a><a class="btn-delete synset-delete" href="/ManageEntries/Delete?synsetId=@t.SynsetId&headWord=@item.HeadWord" title="Xóa">
+                                    <input type="hidden" value="173" />
+                                </a>
+                            </td>*@
+                        </tr>
+                          
+                        }
+                        count++;
+                    }
+                </tbody>
+            </table>
+            <div class="view-more">
+                @Html.PagedListPager((IPagedList)Model.AllEntries, page => Url.Action("Index", new { page = page, startWith = Request.QueryString["startWith"] }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })</div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
+<div class="span span9">
+    <div class="head">
+        <div class="icm-zoom">
+        </div>
+        <h1>
+            Tra cứu gần đây</h1>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="block">
+        <div class="recent-words">
+            <ul>
+                @if (Session["Recent"] != null)
+                {
+                    ((List<string>)Session["Recent"]).Reverse();
+                    foreach (var item in (List<string>)Session["Recent"])
+                    { 
+                    <li><a href="/Result?keyword=@item">@item</a></li>  
+                    }
+                    ((List<string>)Session["Recent"]).Reverse();
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="span span9">
+    <div class="head">
+        <div class="icm-chats">
+        </div>
+        <h1>
+            Hỏi đáp</h1>
+        <div class="clear">
+        </div>
+    </div>
+    <div class="block">
+        @Html.Partial("_QA")
+    </div>
+</div>
+<div class="clear">
+</div>
+@Html.Partial("_LogOnPopUp", Model.LogOnModel)

@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "Nhập dữ liệu từ file Excel";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+<style type="text/css">
+    #Import
+    {
+        border-color: #143D6B;
+        background: url("/Content/img/backgrounds/menu-item-active.jpg") left top repeat-x;
+    }
+</style>
+<div class="row-fluid">
+    <h2>
+        Nhập dữ liệu từ file Excel</h2>
+    <div class="dr">
+        <span></span>
+    </div>
+    <div class="span span12">
+        <div class="head">
+            <div class="icm-plus">
+            </div>
+            <h1>
+                Nhập dữ liệu</h1>
+            <div class="clear">
+            </div>
+        </div>
+        <div class="block">
+        <form id="ajaxUploadForm" action="/Import" method="post" enctype="multipart/form-data">
+             <div class="entry-form">
+                    <div class="editor">
+                        <div class="editor-label">
+                            Nhập dữ liệu:
+                        </div>
+                        <div class="editor-field">
+                           <input id="import-file" type="file" name="file" />
+                           <input type="submit" class="btn" value="Nhập" />       
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>  
+                    <div class="editor">
+                        <div class="editor-label">
+                        </div>
+                        <div class="editor-field">
+                                                 
+                        </div>
+                        <div class="clear">
+                        </div>
+                    </div>
+                </div>   
+            </form>
+        </div>
+    </div>
+    <div class="clear">
+    </div>
+</div>
