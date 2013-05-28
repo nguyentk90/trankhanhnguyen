@@ -19,3 +19,24 @@ E:\acb\TraCuuThuatNgu\TraCuuThuatNgu\bin\EntityFramework.xml
 E:\acb\TraCuuThuatNgu\TraCuuThuatNgu\bin\EntityFramework.Extended.xml
 E:\acb\TraCuuThuatNgu\TraCuuThuatNgu\bin\PagedList.xml
 E:\acb\TraCuuThuatNgu\TraCuuThuatNgu\bin\PagedList.Mvc.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\TraCuuThuatNgu.dll
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\TraCuuThuatNgu.pdb
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.Core.dll
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.Owin.dll
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.Owin.Host.SystemWeb.dll
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.Web.Infrastructure.dll
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Newtonsoft.Json.dll
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Owin.dll
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\EntityFramework.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\EntityFramework.Extended.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.Core.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.Owin.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.Owin.Host.SystemWeb.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Newtonsoft.Json.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\PagedList.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\PagedList.Mvc.xml
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\obj\Debug\TraCuuThuatNgu.dll
+C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\obj\Debug\TraCuuThuatNgu.pdb

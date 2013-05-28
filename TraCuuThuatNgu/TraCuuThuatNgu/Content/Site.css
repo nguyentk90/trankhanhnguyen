@@ -1,4 +1,4 @@
-﻿/*----------------------------------------------------------
+﻿
 The base color for this template is #5c87b2. If you'd like
 to use a different color start by replacing all instances of
 #5c87b2 with your new color.
@@ -367,6 +367,8 @@ input[type="submit"]
     border-color: #486B91;
     min-width: 70px;
 }
+
+
 .btn
 {
     display: inline-block;
@@ -398,6 +400,11 @@ input[type="submit"]
     -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
     -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
     box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+.btn-mini {
+padding: 2px 6px;
+font-size: 11px;
+line-height: 17px;
 }
 .btn-danger
 {
@@ -1124,4 +1131,56 @@ table
 .alphabet-work
 {
     background: #fff;
+}
+
+/* answer dialog */
+.an-dialog
+{
+    z-index: 9004;
+    position: absolute;
+    padding: 0px;
+    width: 220px;
+    padding: 5px;
+    border: 1px solid #CCC;
+    border: 1px solid rgba(0, 0, 0, 0.2);
+    -webkit-border-radius: 6px;
+    -moz-border-radius: 6px;
+    border-radius: 6px;
+    -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding;
+    background-clip: padding-box;
+    background: #fff;
+}
+.an-dialog:before
+{
+    position: absolute;
+    top: -8px;
+    right: 20px;
+    display: inline-block;
+    border-right: 8px solid rgba(0, 0, 0, 0);
+    border-bottom: 8px solid #666666;
+    border-left: 8px solid rgba(0, 0, 0, 0);
+    content: ' ';    
+}
+
+.an-dialog h2
+{
+    border-bottom: 1px solid #009EC3;
+    padding: 0px;
+    margin: 2px;
+    font-size: 13px;
+    font-weight: bold;
+    font-style: italic;
+}
+.an-dialog textarea
+{
+    display: block;
+    border: 1px solid #CCC;
+    min-height: 50px;
+    min-width:210px;
+    font-size: 12px;
+    border-radius: 3px;
 }
