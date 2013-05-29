@@ -18,7 +18,7 @@ namespace TraCuuThuatNgu.Controllers
             EntriesModel entriesModel = new EntriesModel();
             EntriesViewModel viewModel = new EntriesViewModel();
 
-            int size = 5;
+            int size = 10;
 
             var pageNumber = page ?? 1;
 
@@ -39,7 +39,9 @@ namespace TraCuuThuatNgu.Controllers
 
             ViewBag.Size = size;
 
-           
+            // get questions
+            QAModel qaModel = new QAModel();
+            viewModel.Questions = qaModel.GetQuestionPaged(1, 5);
 
             return View(viewModel);
         }

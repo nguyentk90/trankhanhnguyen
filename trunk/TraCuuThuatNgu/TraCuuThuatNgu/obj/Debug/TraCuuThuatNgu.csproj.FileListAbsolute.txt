@@ -40,3 +40,24 @@ C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\Tra
 C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\obj\Debug\ResolveAssemblyReference.cache
 C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\obj\Debug\TraCuuThuatNgu.dll
 C:\Documents and Settings\Forbes\My Documents\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\obj\Debug\TraCuuThuatNgu.pdb
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\TraCuuThuatNgu.dll
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\TraCuuThuatNgu.pdb
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.Core.dll
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.Owin.dll
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.SystemWeb.dll
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.Web.Infrastructure.dll
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Newtonsoft.Json.dll
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Owin.dll
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\EntityFramework.xml
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\EntityFramework.Extended.xml
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.Core.xml
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.Owin.xml
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.AspNet.SignalR.SystemWeb.xml
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\Newtonsoft.Json.xml
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\PagedList.xml
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\bin\PagedList.Mvc.xml
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\obj\Debug\ResolveAssemblyReference.cache
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\obj\Debug\TraCuuThuatNgu.dll
+E:\DATN\trankhanhnguyen\TraCuuThuatNgu\TraCuuThuatNgu\obj\Debug\TraCuuThuatNgu.pdb

@@ -139,7 +139,7 @@
                                     + '<p>'
                                         + content + '</p>'
                                     + '<p style="text-align: right">'
-                                        + '<a class="btn-answer" data-qid="' + qid + '" href="#">Trả lời</a></p>'
+                                        + '<a class="btn-answer" data-qid="' + qid + '" href="javascript:">Trả lời</a></p>'
                                 + '</div>'
                                 + '<div id="' + qid + '" class="answer-list">'
                                 + '</div>'
@@ -220,12 +220,25 @@
         $(".an-btn-close").live('click', function () {
             $(this).parent().remove();
         });
+
+
+        // not authenticate
+        $("#sendquestionNotAu").click(function () {
+            alert("Bạn cần đăng nhập để sử dụng chức năng này!");
+        });
     });
 </script>
 <div class="wrap-qa">
     <div class="input-question">
         <textarea id="questioncontent" placeholder="Nhập câu hỏi..."></textarea>
+        @if (Request.IsAuthenticated)
+        {
         <input type="button" class="btn" id="sendquestion" value="Gửi" />
+        }
+        else
+        { 
+             <input type="button" class="btn" id="sendquestionNotAu" value="Gửi" />
+        }
     </div>
     <div class="dr">
         <span></span>
@@ -236,7 +249,7 @@
             <div class="question-item">
                 <div class="question-item-content">
                     <p>
-                        <span class="username">@item.aspnet_Users.UserName</span><span class="date">@item.DateAdd</span></p>
+                        <span class="username">@item.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)</span></p>
                     <p>
                         @item.QContent</p>
                     <p style="text-align: right">
@@ -247,17 +260,20 @@
                     {
                         <div class="answer-item">
                             <p>
-                                <span class="username-a">@an.aspnet_Users.UserName</span><span class="date">@an.DateAdd</span></p>
+                                <span class="username-a">@an.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span></p>
                             <p>
                                 @an.AContent</p>
                         </div>                   
                     }
                 </div>
             </div>        
-        }
-        <div style="text-align: center; margin-top: 10px;">
-            <a href="javascript:" id="btn-prev" class="btn-showmore"><< Mới hơn</a><span id="limit" class="btn-showmore-count">10</span><a href="javascript:"
-              id="btn-next"  class="btn-showmore">Cũ hơn >></a>
-        </div>
+        }        
     </div>
+    <div style="text-align: center; margin-top: 10px;">
+            <a href="javascript:" id="btn-prev" class="btn-showmore"><< Mới hơn</a>
+            <span id="limit" class="btn-showmore-count">1</span>
+            <a href="javascript:"
+              id="btn-next"  class="btn-showmore">Cũ hơn >></a>
+              <input type="hidden" value="" />
+        </div>
 </div>

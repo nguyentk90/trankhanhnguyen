@@ -216,6 +216,120 @@
     $("#add-content-close").click(popUpAddContentClose);
 
 
+
+
+   // Next Or Prev Quesion List
+        $("#btn-prev").click(function () {
+            var limit = $("#limit").text();
+ 
+            if (limit > 1) {
+
+                limit--;
+
+                $.ajax({
+                    type: 'POST',
+                    contentType: "application/json",
+                    url: "/QA",
+                    data: "{ 'limit':'" + limit + "'}",
+                    success: function (d) {
+                    $(".question-list").empty();
+                        $.each(d, function (i, item) { // First Level                          
+
+                            var newItem = '<div class="question-item">'
+                                + '<div class="question-item-content">'
+                                    + '<p>'
+                                        + '<span class="username">' + item.Username + '</span><span class="date">' + item.DateAdd + '</span></p>'
+                                    + '<p>'
+                                        + item.QContent + '</p>'
+                                    + '<p style="text-align: right">'
+                                        + '<a class="btn-answer" data-qid="' + item.Qid + '" href="javascript:">Trả lời</a></p>'
+                                + '</div>'
+                                + '<div id="' + item.Qid + '" class="answer-list">'
+                                + '</div>'
+                                        + '</div>';
+
+                            $(newItem).prependTo(".question-list");
+
+                            $.each(item.AList, function (j, item1) {  // The contents inside stars
+                                $('#' + item.Qid).append('<div class="answer-item">'
+                                        + '<p>'
+                                            + '<span class="username-a">' + item1.Username + '</span>'
+                                            + '<span class="date">' + item1.DateAdd + '</span>'
+                                            + '</p>'
+                                        + '<p>' + item1.AContent + '</p>'
+                                    + '</div>');
+                            });
+
+                        });
+
+                        // set limit
+                        $("#limit").text(limit);
+                    },
+                    error: function (e, d) {
+                    },
+                    dataType: "json"
+                });
+               
+               $(".question-list").first().focus();
+            } else {
+                return;
+            }
+        });
+
+        // Next
+        $("#btn-next").click(function () {
+            var limit = $("#limit").text();
+            limit++           
+            $.ajax({
+                type: 'POST',
+                contentType: "application/json",
+                url: "/QA",
+                data: "{ 'limit':'" + limit + "'}",
+                success: function (d) {
+                    if (d.message == 'full') {
+                    } else {
+                        $(".question-list").empty();
+                        $.each(d, function (i, item) { // First Level                          
+
+                            var newItem = '<div class="question-item">'
+                                + '<div class="question-item-content">'
+                                    + '<p>'
+                                        + '<span class="username">' + item.Username + '</span><span class="date">' + item.DateAdd + '</span></p>'
+                                    + '<p>'
+                                        + item.QContent + '</p>'
+                                    + '<p style="text-align: right">'
+                                        + '<a class="btn-answer" data-qid="' + item.Qid + '" href="javascript:">Trả lời</a></p>'
+                                + '</div>'
+                                + '<div id="' + item.Qid + '" class="answer-list">'
+                                + '</div>'
+                                        + '</div>';
+
+                            $(newItem).prependTo(".question-list");
+
+                            $.each(item.AList, function (j, item1) {  // The contents inside stars
+                                $('#' + item.Qid).append('<div class="answer-item">'
+                                        + '<p>'
+                                            + '<span class="username-a">' + item1.Username + '</span>'
+                                            + '<span class="date">' + item1.DateAdd + '</span>'
+                                            + '</p>'
+                                        + '<p>' + item1.AContent + '</p>'
+                                    + '</div>');
+                            });
+
+                        });
+
+                        // set limit
+                        $("#limit").text(limit);
+                    }
+                },
+                error: function (e, d) {
+                },
+                dataType: "json"
+            });
+            $(".question-list").first().focus();
+        });
+
+
 });
 
 
