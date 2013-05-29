@@ -162,24 +162,36 @@
             $(newItem).appendTo('#' + qid).fadeIn('slow');
         };
 
+        // Check Authenticate
+        var checkAuthen = $("#checkAuthen").val();
+
         // Start the connection.
         $.connection.hub.start().done(function () {
+            
             $('#sendquestion').click(function () {
 
-                var checkBlank = $("#questioncontent").val();
-                if ($.trim(checkBlank) == '') {
-                    alert("Bạn chưa nhập nội dung.");
-                    $("#questioncontent").focus();
+
+                if (checkAuthen == 'true') {
+
+                    var checkBlank = $("#questioncontent").val();
+                    if ($.trim(checkBlank) == '') {
+                        alert("Bạn chưa nhập nội dung.");
+                        $("#questioncontent").focus();
+                    } else {
+                        // Call the Send method on the hub. 
+                        chat.server.send($('#questioncontent').val(), "Q", 0);
+                        // Clear text box and reset focus for next comment. 
+                        $('#questioncontent').val('');
+                    }
                 } else {
-                    // Call the Send method on the hub. 
-                    chat.server.send($('#questioncontent').val(), "Q", 0);
-                    // Clear text box and reset focus for next comment. 
-                    $('#questioncontent').val('');
+                    alert("Bạn cần đăng nhập để sử dụng chức năng này!");
                 }
             });
 
             // send to server
             $("#btn-an").live('click', function () {
+
+
                 var answer_content = $("#an-content").val();
                 var qid = $(this).attr('data-qid');
                 if ($.trim(answer_content) != '') {
@@ -189,30 +201,37 @@
                     alert("Bạn chưa nhập nội dung.");
                     $("#an-content").focus();
                 }
+
             });
 
         });
 
         $(".btn-answer").live('click', function (e) {
-            var pageX = e.pageX;
-            var pageY = e.pageY;
-            var qid = $(this).attr();
+            if (checkAuthen == 'true') {
 
-            //remove previous dialog
-            $(".an-dialog").remove();
+                var pageX = e.pageX;
+                var pageY = e.pageY;
+                var qid = $(this).attr();
 
-            $(".wrap-qa").append('<div class="an-dialog">'
+                //remove previous dialog
+                $(".an-dialog").remove();
+
+                $(".wrap-qa").append('<div class="an-dialog">'
                 + '<h2>Trả lời:</h2>'
                 + '<textarea id="an-content"></textarea>'
                 + '<input class="btn btn-mini" id="btn-an" data-qid="' + $(this).attr("data-qid") + '" type="button" value="Gửi"/>'
                 + '<a href="javascript:" class="btn-link an-btn-close">Đóng</a>'
                 + '</div>');
 
-            $('.an-dialog').css("top", pageY + 20 + "px");
-            $('.an-dialog').css("left", pageX - 200 + "px");
-            $('.an-dialog').slideDown('slow');
+                $('.an-dialog').css("top", pageY + 20 + "px");
+                $('.an-dialog').css("left", pageX - 200 + "px");
+                $('.an-dialog').slideDown('slow');
 
-            $("#an-content").focus();
+                $("#an-content").focus();
+
+            } else {
+                alert("Bạn cần đăng nhập để sử dụng chức năng này!");
+            }
 
         });
 
@@ -222,26 +241,23 @@
         });
 
 
-        // not authenticate
-        $("#sendquestionNotAu").click(function () {
-            alert("Bạn cần đăng nhập để sử dụng chức năng này!");
-        });
     });
 </script>
 <div class="wrap-qa">
     <div class="input-question">
         <textarea id="questioncontent" placeholder="Nhập câu hỏi..."></textarea>
-        @if (Request.IsAuthenticated)
-        {
         <input type="button" class="btn" id="sendquestion" value="Gửi" />
+        @if (Request.IsAuthenticated)
+        {        
+            <input type="hidden" id="checkAuthen" name="checkAuthen" value="true" />
         }
         else
         { 
-             <input type="button" class="btn" id="sendquestionNotAu" value="Gửi" />
+            <input type="hidden" id="checkAuthen" name="checkAuthen" value="false" />             
         }
     </div>
     <div class="dr">
-        <span></span>
+        <span id="focus"></span>
     </div>
     <div class="question-list">
         @foreach (var item in Model)
@@ -267,13 +283,12 @@
                     }
                 </div>
             </div>        
-        }        
+        }
     </div>
     <div style="text-align: center; margin-top: 10px;">
-            <a href="javascript:" id="btn-prev" class="btn-showmore"><< Mới hơn</a>
-            <span id="limit" class="btn-showmore-count">1</span>
-            <a href="javascript:"
-              id="btn-next"  class="btn-showmore">Cũ hơn >></a>
-              <input type="hidden" value="" />
-        </div>
+        <a href="javascript:" id="btn-prev" class="btn-showmore"><< Mới hơn</a> <span id="limit"
+            class="btn-showmore-count">1</span> <a href="javascript:" id="btn-next" class="btn-showmore">
+                Cũ hơn >></a>
+        <input type="hidden" value="" />
+    </div>
 </div>

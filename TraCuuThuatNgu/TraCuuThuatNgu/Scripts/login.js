@@ -270,7 +270,7 @@
                     dataType: "json"
                 });
                
-               $(".question-list").first().focus();
+               $("#questioncontent").focus();
             } else {
                 return;
             }
@@ -326,7 +326,7 @@
                 },
                 dataType: "json"
             });
-            $(".question-list").first().focus();
+            $("#questioncontent").focus();
         });
 
 

@@ -30,12 +30,27 @@ namespace TraCuuThuatNgu.Controllers
             ViewBag.OrderBy = order;
 
             //search history list
-            managesearchHistoryModel.GetAllSearchHistory = searchHistoryModel.GetAllSearchHistory(pageNumber,15,order);
-            
+            managesearchHistoryModel.GetAllSearchHistory = searchHistoryModel.GetAllSearchHistory(pageNumber, 15, order);
+
             //summary search history 
             managesearchHistoryModel.SummarySearchHistoryModel = new SummarySearchHistoryModel();
 
             return View(managesearchHistoryModel);
+        }
+
+
+        // POST: Delete search history
+        [HttpPost]
+        public ActionResult Delete(string keyword)
+        {
+            if (searchHistoryModel.Delete(keyword) > 0)
+            {
+                return Json(new { message = "SUCCESS" });
+            }
+            else
+            {
+                return Json(new { message = "FAIL" });
+            }
         }
 
     }

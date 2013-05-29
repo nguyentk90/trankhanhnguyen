@@ -3,7 +3,7 @@
 $(document).ready(function () {
 
 
-    //change order searching history list
+    // Change order searching history list
     $("#order-search-history").change(function () {
 
         var url = window.location.href;
@@ -26,7 +26,7 @@ $(document).ready(function () {
 
 
 
-    //add synonym
+    // Add synonyms
 
     var synonyms = new Array();
     $("#list-synonyms li").each(function (index) {
@@ -35,7 +35,7 @@ $(document).ready(function () {
     });
 
     $("#add-synonym").click(function () {
-        //check contains in list li
+        // Check contains in list li
         if ($.trim($("#input-synonym").val()) == "") {
             alert("Chưa nhập từ!");
             $("#input-synonym").focus();
@@ -49,6 +49,7 @@ $(document).ready(function () {
         }
     });
 
+    // Remove synonym
     $(".delete-synonym").live('click', function () {
         $(this).parent().parent().remove();
         var i = synonyms.indexOf($(this).prev().text());
@@ -56,14 +57,14 @@ $(document).ready(function () {
     });
 
 
-    //edit synset form
+    // Edit synset form -- add array synonym and send request to edit
     $("#edit-synset-form").submit(function () {
         $("#synonyms-data").val(synonyms);
         return true;
     });
 
 
-    /*DELETE USER HISTORY*/
+    // Delete comment
     $(".btn-comment-delete").click(function () {
 
         var checkDelete = confirm('Bạn có chắc muốn xóa không?');
@@ -91,7 +92,35 @@ $(document).ready(function () {
     });
 
 
-    //delete User
+    // Delete search history
+    $(".btn-search-history-delete").click(function () {
+
+        var checkDelete = confirm('Bạn có chắc muốn xóa không?');
+
+        var row = $(this).parent().parent();
+
+        if (checkDelete) {
+            $.ajax({
+                url: '/ManageSearchHistory/Delete',
+                type: 'POST',
+                data: "{ 'keyword': '" + $(this).children().val() + "'}",
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.message == 'SUCCESS') {
+                        row.slideUp('slow');
+                    } else {
+                        alert("Lỗi");
+                    }
+                },
+                error: function () {
+                    alert("error");
+                }
+            });
+        }
+    });
+
+
+    // Delete User
     $("#btn-delete-user").click(function () {
 
         var checkDelete = confirm("Bạn có chắc muốn xóa thành viên này!");
@@ -117,7 +146,7 @@ $(document).ready(function () {
     });
 
 
-    //upload file and import
+    // Upload file and import
     $("#ajaxUploadForm").ajaxForm({
         iframe: true,
         type: 'POST',
@@ -126,7 +155,7 @@ $(document).ready(function () {
         timeout: 1200000,
         async: false,
         beforeSubmit: function () {
-            //Do something here if needed like show in progress message
+            // Do something here if needed like show in progress message
             var check = $("#import-file").val();
             if (check != '')
             { popUpLoadingOpen(); }
@@ -150,7 +179,7 @@ $(document).ready(function () {
     });
 
 
-    /*DELETE SYNSET OF TERM*/
+    // DELETE SYNSET OF TERM
     $(".synset-delete").click(function () {
 
         var checkDelete = confirm('Bạn có chắc muốn xóa không?');
@@ -180,7 +209,7 @@ $(document).ready(function () {
 
 });
 
-/*LOGIN POPUP FUNCTION*/
+/*LOADING POPUP FUNCTION*/
 //-------------------------------
 function popUpLoadingOpen() {
     //over-lay
