@@ -99,5 +99,24 @@ namespace TraCuuThuatNgu.Models
             }
 
         }
+
+        // Delete search history 
+        public int Delete(string keyword)
+        {
+            try
+            {
+                SearchHistory searchHistory = context.SearchHistories.Find(keyword);
+                if (searchHistory != null)
+                {
+                    context.SearchHistories.Remove(searchHistory);
+                }
+                //change context
+                return context.SaveChanges();
+            }
+            catch
+            {
+                return -1;
+            }
+        }
     }
 }

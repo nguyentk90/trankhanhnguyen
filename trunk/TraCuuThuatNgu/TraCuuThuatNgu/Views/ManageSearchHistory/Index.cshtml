@@ -84,11 +84,14 @@
                         <th width="25%">
                             Có trong dữ liệu
                         </th>
-                        <th width="25%">
+                        <th width="10%">
                             Lượt tra cứu
                         </th>
                         <th width="25%">
                             Tra lần cuối lúc
+                        </th>
+                        <th width="15%">
+                           <center>Thao tác</center> 
                         </th>
                     </tr>
                 </thead>
@@ -114,6 +117,11 @@
                             </td>
                             <td>
                                 @String.Format("{0:d/M/yyyy HH:mm}", item.DateModify)
+                            </td>
+                            <td align="center">
+                               <a class="btn-delete btn-search-history-delete" href="javascript:" title="Xóa" >
+                                    <input type="hidden" value="@item.Keyword" />
+                               </a>
                             </td>
                         </tr>
                     }

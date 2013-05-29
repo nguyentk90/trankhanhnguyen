@@ -115,7 +115,6 @@
     <Compile Include="Controllers\MyCommentsController.cs" />
     <Compile Include="Controllers\QAController.cs" />
     <Compile Include="Controllers\ResultController.cs" />
-    <Compile Include="Controllers\SearchHistoryController.cs" />
     <Compile Include="Controllers\TestChatController.cs" />
     <Compile Include="Controllers\TestController.cs" />
     <Compile Include="Controllers\UserHistoryController.cs" />
