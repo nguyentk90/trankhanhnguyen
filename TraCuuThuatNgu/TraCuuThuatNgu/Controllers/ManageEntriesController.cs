@@ -21,7 +21,7 @@ namespace TraCuuThuatNgu.Controllers
             EntriesModel entriesModel = new EntriesModel();
             EntriesViewModel viewModel = new EntriesViewModel();
 
-            int size = 5;
+            int size = 10;
 
             var pageNumber = page ?? 1;
 

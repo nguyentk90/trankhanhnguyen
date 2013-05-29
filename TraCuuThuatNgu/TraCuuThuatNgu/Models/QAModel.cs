@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using PagedList;
 
 namespace TraCuuThuatNgu.Models
 {
@@ -24,12 +25,16 @@ namespace TraCuuThuatNgu.Models
         }
 
         // Get list questions from..to
-        public IEnumerable<Question> GetQuestionPaged(int page, int size)
+        public IPagedList<Question> GetQuestionPaged(int page, int size)
         {
             return context.Questions
-                .OrderByDescending(x => x.DateAdd)
-                .Skip((page - 1) * size)
-                .Take(size);
+                .OrderByDescending(x => x.DateAdd).ToPagedList(page, size);                
+        }
+
+        // Get total question
+        public int ToalQuestions()
+        {
+            return context.Questions.Count();
         }
     }
 }

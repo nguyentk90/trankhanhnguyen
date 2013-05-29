@@ -5,6 +5,7 @@ using System.Globalization;
 using System.Linq;
 using System.Web;
 using TraCuuThuatNgu.Models;
+using PagedList;
 
 namespace TraCuuThuatNgu.ViewModels
 {
@@ -17,7 +18,7 @@ namespace TraCuuThuatNgu.ViewModels
         
         public LogOnModel LogOnModel { get; set; }
 
-        public IEnumerable<Question> Questions { get; set; }
+        public IPagedList<Question> Questions { get; set; }
        
     }
 }

@@ -100,7 +100,7 @@ namespace TraCuuThuatNgu.Controllers
 
             // get questions
              QAModel qaModel = new QAModel();
-             resultViewModel.Questions = qaModel.GetQuestionPaged(1, 10);
+             resultViewModel.Questions = qaModel.GetQuestionPaged(1, 5);
 
             return View(resultViewModel);
         }
