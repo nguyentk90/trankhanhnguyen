@@ -121,17 +121,17 @@ namespace TraCuuThuatNgu.Models
         }
 
         // Delete synset by synsetId
-        public int DeleteSynsetBySynsetId(int synsetId, string headWord)
-        {
-            Synset synset = context.Synsets.Find(synsetId);
+        //public int DeleteSynsetBySynsetId(int synsetId, string headWord)
+        //{
+        //    Synset synset = context.Synsets.Find(synsetId);
 
-            WordIndex term = context.WordIndexes.Find(headWord);
+        //    WordIndex term = context.WordIndexes.Find(headWord);
 
-            term.Synsets.Remove(synset);
-            context.Synsets.Remove(synset);
+        //    term.Synsets.Remove(synset);
+        //    context.Synsets.Remove(synset);
 
-            return context.SaveChanges();
-        }
+        //    return context.SaveChanges();
+        //}
 
 
         // Edit synset by synsetId
@@ -142,7 +142,7 @@ namespace TraCuuThuatNgu.Models
             synset.Def = editedSynset.Def;
             synset.Exa = editedSynset.Exa;
 
-            //delete all synonym relation 
+            // Delete all synonym relation 
             synset.WordIndexes.Clear();
 
             synset.WordIndexes.Add(context.WordIndexes.Find(editedSynset.HeadWord));
@@ -162,7 +162,7 @@ namespace TraCuuThuatNgu.Models
                     }
                     else
                     {
-                        //entry
+                        // Entry
                         wordIndex = new WordIndex();
                         wordIndex.HeadWord = headWord;
                         string[] word = headWord.Split(' ');
@@ -209,7 +209,7 @@ namespace TraCuuThuatNgu.Models
             return editSynset;
         }
 
-        //get synonyms
+        // Get synonyms
         public IEnumerable<string> GetSynonyms(int synsetId, string headWord)
         {
             if (synsetId == -1)
@@ -328,6 +328,9 @@ namespace TraCuuThuatNgu.Models
                 if (countSynsets <= 1)
                 {
                     context.WordIndexes.Remove(index);
+                    // Remove PK
+                    context.Comments.Delete(x => x.HeadWord == headWord);
+                    context.Favorites.Delete(x => x.HeadWord == headWord);
                 }
                 if (synset.WordIndexes.Count == 0)
                 {
@@ -337,12 +340,7 @@ namespace TraCuuThuatNgu.Models
             else
             {
                 return -1;
-            }
-
-
-            // Remove PK
-            context.Comments.Delete(x => x.HeadWord == headWord);
-            context.Favorites.Delete(x => x.HeadWord == headWord);
+            }           
 
             // Save changes
             return context.SaveChanges();
