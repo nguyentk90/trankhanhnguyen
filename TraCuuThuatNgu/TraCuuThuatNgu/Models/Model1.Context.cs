@@ -40,5 +40,6 @@ namespace TraCuuThuatNgu.Models
         public DbSet<Synset> Synsets { get; set; }
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Question> Questions { get; set; }
+        public DbSet<AutoComplete> AutoCompletes { get; set; }
     }
 }

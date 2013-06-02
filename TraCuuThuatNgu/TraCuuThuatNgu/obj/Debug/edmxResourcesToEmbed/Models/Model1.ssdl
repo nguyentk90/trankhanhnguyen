@@ -6,6 +6,7 @@
     <EntitySet Name="aspnet_Roles" EntityType="TraCuuThuatNguModel.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="aspnet_Users" EntityType="TraCuuThuatNguModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="aspnet_UsersInRoles" EntityType="TraCuuThuatNguModel.Store.aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AutoComplete" EntityType="TraCuuThuatNguModel.Store.AutoComplete" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Comment" EntityType="TraCuuThuatNguModel.Store.Comment" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Favorite" EntityType="TraCuuThuatNguModel.Store.Favorite" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Profile" EntityType="TraCuuThuatNguModel.Store.Profile" store:Type="Tables" Schema="dbo" />
@@ -145,6 +146,12 @@
     </Key>
     <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+  </EntityType>
+  <EntityType Name="AutoComplete">
+    <Key>
+      <PropertyRef Name="Keyword" />
+    </Key>
+    <Property Name="Keyword" Type="nvarchar" Nullable="false" MaxLength="256" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>
