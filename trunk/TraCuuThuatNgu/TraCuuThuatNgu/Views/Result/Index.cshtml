@@ -75,7 +75,7 @@
                         }: </span>
                     <script>                        $("span span").last().removeClass('synset-item');</script>
                     <span class="def">@item.Def
-                    </span><span class="exa">@item.Exa</span>
+                    </span><span class="exa">Ví dụ: @item.Exa</span>
                 </p>
                 }
             }
@@ -100,7 +100,7 @@
                             }
                         }: </span>
                     <script>                        $("span span").last().removeClass('synset-item');</script>
-                    <span class="def">@item.Def</span> <span class="exa">@item.Exa</span>
+                    <span class="def">@item.Def</span> <span class="exa">Ví dụ: @item.Exa</span>
                 </p>
                 }
             }
@@ -111,7 +111,7 @@
         </div>
             }
         @* Suggest when keyword not found*@ 
-        @*<div class="description-result">
+        <div class="description-result">
             <span class="ic-cloud"></span>
             @if (Model.Entry == null)
             {
@@ -123,10 +123,11 @@
             {
                 if (!Model.Entry.HeadWord.Equals(item.HeadWord))
                 {
-                <a class="suggest-term" href="#">@item.HeadWord</a>
+                <a class="suggest-term suggest-comma" href="/Result?keyword=@item.HeadWord">@item.HeadWord</a>
                 }
             }
-        </div>*@
+             <script>                 $("a").last().removeClass('suggest-comma');</script>
+        </div>
               
         
         @if (Model.Entry != null)
@@ -145,7 +146,7 @@
                     {
                         <div class="itemOut">
                             <a href="#" class="image">
-                                <img src="../Content/img/users/alexander.jpg" class="img-polaroid"></a>
+                                <img src="../Content/img/users/noAvatar.gif" class="img-polaroid"></a>
                             @if (User.Identity.IsAuthenticated)
                             {                        
                                 <input name="headWord" type="hidden" value='@Request.Params["keyword"].ToString()' />
@@ -183,7 +184,7 @@
                         
                         <div class="itemOut">
                             <a href="#" class="image">
-                                <img src="../Content/img/users/alexander.jpg" class="img-polaroid"></a>
+                                <img src="../Content/img/users/noAvatar.gif" class="img-polaroid"></a>
                             <div class="text">
                                 <div class="info">
                                     <span class="name">@item.aspnet_Users.UserName</span> <a style="float:right;margin-left:10px" title="Báo cáo sai phạm" class="btn-report mark-report" data-val="@item.CommentId"  href="">

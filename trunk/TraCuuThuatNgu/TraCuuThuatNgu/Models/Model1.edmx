@@ -11,6 +11,7 @@
           <EntitySet Name="aspnet_Roles" EntityType="TraCuuThuatNguModel.Store.aspnet_Roles" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_Users" EntityType="TraCuuThuatNguModel.Store.aspnet_Users" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="aspnet_UsersInRoles" EntityType="TraCuuThuatNguModel.Store.aspnet_UsersInRoles" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="AutoComplete" EntityType="TraCuuThuatNguModel.Store.AutoComplete" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Comment" EntityType="TraCuuThuatNguModel.Store.Comment" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Favorite" EntityType="TraCuuThuatNguModel.Store.Favorite" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Profile" EntityType="TraCuuThuatNguModel.Store.Profile" store:Type="Tables" Schema="dbo" />
@@ -150,6 +151,12 @@
           </Key>
           <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
           <Property Name="RoleId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="AutoComplete">
+          <Key>
+            <PropertyRef Name="Keyword" />
+          </Key>
+          <Property Name="Keyword" Type="nvarchar" Nullable="false" MaxLength="256" />
         </EntityType>
         <EntityType Name="Comment">
           <Key>
@@ -510,6 +517,7 @@
             <End Role="aspnet_Users" EntitySet="aspnet_Users" />
             <End Role="Question" EntitySet="Questions" />
           </AssociationSet>
+          <EntitySet Name="AutoCompletes" EntityType="TraCuuThuatNguModel.AutoComplete" />
         </EntityContainer>
         <EntityType Name="aspnet_Users">
           <Key>
@@ -835,6 +843,12 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="AutoComplete">
+          <Key>
+            <PropertyRef Name="Keyword" />
+          </Key>
+          <Property Type="String" Name="Keyword" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1029,6 +1043,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="AutoCompletes">
+            <EntityTypeMapping TypeName="TraCuuThuatNguModel.AutoComplete">
+              <MappingFragment StoreEntitySet="AutoComplete">
+                <ScalarProperty Name="Keyword" ColumnName="Keyword" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -1073,15 +1094,11 @@
         <EntityTypeShape EntityType="TraCuuThuatNguModel.UserContent" Width="1.5" PointX="0.75" PointY="6.75" Height="2.5571907552083371" />
         <EntityTypeShape EntityType="TraCuuThuatNguModel.WordIndex" Width="1.5" PointX="7.125" PointY="3.75" Height="1.9802864583333388" />
         <AssociationConnector Association="TraCuuThuatNguModel.FK_RawData_aspnet_Users1" >
-          <ConnectorPoint PointX="3.5126953906250002" PointY="4.7206022135416656" />
-          <ConnectorPoint PointX="3.5126953906250002" PointY="8.02859537760417" />
-          <ConnectorPoint PointX="3.3897286263020838" PointY="8.02859537760417" />
-          <ConnectorPoint PointX="3.2230619596354169" PointY="8.02859537760417" />
-          <ConnectorPoint PointX="3.1834285286458335" PointY="8.02859537760417" />
-          <ConnectorPoint PointX="3.0167618619791665" PointY="8.02859537760417" />
-          <ConnectorPoint PointX="2.9771284309895836" PointY="8.02859537760417" />
-          <ConnectorPoint PointX="2.8104617643229166" PointY="8.02859537760417" />
-          <ConnectorPoint PointX="2.25" PointY="8.02859537760417" />
+          <ConnectorPoint PointX="3.03125" PointY="4.7206022135416656" />
+          <ConnectorPoint PointX="3.03125" PointY="8.6653857421875031" />
+          <ConnectorPoint PointX="2.9427058333333336" PointY="8.6653857421875031" />
+          <ConnectorPoint PointX="2.7760391666666666" PointY="8.6653857421875031" />
+          <ConnectorPoint PointX="2.25" PointY="8.6653857421875031" />
         </AssociationConnector>
         <AssociationConnector Association="TraCuuThuatNguModel.FK_BinhLuan_ThuatNgu1" >
           <ConnectorPoint PointX="7.125" PointY="4.6283268229166659" />
@@ -1099,17 +1116,15 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="TraCuuThuatNguModel.aspnet_Membership" Width="1.5" PointX="4.75" PointY="8.875" Height="4.5505582682291674" />
         <AssociationConnector Association="TraCuuThuatNguModel.FK__aspnet_Me__UserI__22AA2996" >
-          <ConnectorPoint PointX="3.9126001953125" PointY="4.7206022135416656" />
-          <ConnectorPoint PointX="3.9126001953125" PointY="12.605352376302083" />
-          <ConnectorPoint PointX="4.75" PointY="12.605352376302083" />
+          <ConnectorPoint PointX="3.2031275" PointY="4.7206022135416656" />
+          <ConnectorPoint PointX="3.2031275" PointY="11.499705403645834" />
+          <ConnectorPoint PointX="4.75" PointY="11.499705403645834" />
         </AssociationConnector>
         <EntityTypeShape EntityType="TraCuuThuatNguModel.aspnet_Roles" Width="1.5" PointX="0.75" PointY="10" Height="1.9210009765625031" />
         <AssociationConnector Association="TraCuuThuatNguModel.aspnet_UsersInRoles" >
-          <ConnectorPoint PointX="2.25" PointY="11.0862939453125" />
-          <ConnectorPoint PointX="2.8104617643229166" PointY="11.0862939453125" />
-          <ConnectorPoint PointX="2.9771284309895836" PointY="11.0862939453125" />
-          <ConnectorPoint PointX="3.1000951953125" PointY="11.0862939453125" />
-          <ConnectorPoint PointX="3.1000951953125" PointY="4.7206022135416656" />
+          <ConnectorPoint PointX="2.25" PointY="10.749852701822917" />
+          <ConnectorPoint PointX="2.8593725" PointY="10.749852701822917" />
+          <ConnectorPoint PointX="2.8593725" PointY="4.7206022135416656" />
         </AssociationConnector>
         <EntityTypeShape EntityType="TraCuuThuatNguModel.Synset" Width="1.5" PointX="7.125" PointY="6" Height="1.7566536458333388" />
         <AssociationConnector Association="TraCuuThuatNguModel.Relation" >
@@ -1119,9 +1134,9 @@
         <EntityTypeShape EntityType="TraCuuThuatNguModel.Answer" Width="1.5" PointX="7.25" PointY="12.125" Height="2.5571907552083388" />
         <EntityTypeShape EntityType="TraCuuThuatNguModel.Question" Width="1.5" PointX="5" PointY="15.75" Height="2.5571907552083388" />
         <AssociationConnector Association="TraCuuThuatNguModel.FK_Answer_aspnet_Users" >
-          <ConnectorPoint PointX="3.3063952929687503" PointY="4.7206022135416656" />
-          <ConnectorPoint PointX="3.3063952929687503" PointY="14.434550781250003" />
-          <ConnectorPoint PointX="7.25" PointY="14.434550781250003" />
+          <ConnectorPoint PointX="3.23438" PointY="4.7206022135416656" />
+          <ConnectorPoint PointX="3.23438" PointY="14.357014537760419" />
+          <ConnectorPoint PointX="7.25" PointY="14.357014537760419" />
         </AssociationConnector>
         <AssociationConnector Association="TraCuuThuatNguModel.FK_Answer_Question" >
           <ConnectorPoint PointX="6.40625" PointY="15.75" />
@@ -1129,10 +1144,11 @@
           <ConnectorPoint PointX="7.25" PointY="14.589623268229165" />
         </AssociationConnector>
         <AssociationConnector Association="TraCuuThuatNguModel.FK_Question_aspnet_Users" >
-          <ConnectorPoint PointX="2.89379509765625" PointY="4.7206022135416656" />
-          <ConnectorPoint PointX="2.89379509765625" PointY="17.028595377604169" />
+          <ConnectorPoint PointX="3.2656324999999997" PointY="4.7206022135416656" />
+          <ConnectorPoint PointX="3.2656324999999997" PointY="17.028595377604169" />
           <ConnectorPoint PointX="5" PointY="17.028595377604169" />
         </AssociationConnector>
+        <EntityTypeShape EntityType="TraCuuThuatNguModel.AutoComplete" Width="1.5" PointX="3.375" PointY="6.75" Height="1.2110807291666674" />
       </Diagram>
     </Diagrams>
   </Designer>

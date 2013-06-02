@@ -68,6 +68,7 @@
       <End Role="aspnet_Users" EntitySet="aspnet_Users" />
       <End Role="Question" EntitySet="Questions" />
     </AssociationSet>
+    <EntitySet Name="AutoCompletes" EntityType="TraCuuThuatNguModel.AutoComplete" />
   </EntityContainer>
   <EntityType Name="aspnet_Users">
     <Key>
@@ -393,4 +394,10 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <EntityType Name="AutoComplete">
+    <Key>
+      <PropertyRef Name="Keyword" />
+    </Key>
+    <Property Type="String" Name="Keyword" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+  </EntityType>
 </Schema>
