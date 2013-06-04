@@ -240,7 +240,27 @@
             $(this).parent().remove();
         });
 
+        //------------------------------
+        // Report question or answer
+        // show report icon Answer
+        $(".answer-item").live('hover', function () {
+            $(this).find(".mark-report-a").show();
+        });
 
+        // hide report icon Answer
+        $(".answer-item").live('mouseleave', function () {
+            $(this).find(".mark-report-a").hide();
+        });
+
+        // show report icon Question
+        $(".question-item-content").live('hover', function () {
+            $(this).find(".mark-report-q").show();
+        });
+
+        // hide report icon Question
+        $(".question-item-content").live('mouseleave', function () {
+            $(this).find(".mark-report-q").hide();
+        });
     });
 </script>
 <div class="wrap-qa">
@@ -265,7 +285,10 @@
             <div class="question-item">
                 <div class="question-item-content">
                     <p>
-                        <span class="username">@item.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)</span></p>
+                        <span class="username">@item.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)</span>
+                        <a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-q" data-val=""  href="javascript:">
+                                    </a>
+                        </p>
                     <p>
                         @item.QContent</p>
                     <p style="text-align: right">
@@ -276,7 +299,12 @@
                     {
                         <div class="answer-item">
                             <p>
-                                <span class="username-a">@an.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span></p>
+                                <span class="username-a">@an.aspnet_Users.UserName</span>
+                                
+                                <span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span>
+                                <a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-a" data-val=""  href="javascript:">
+                                    </a>
+                                </p>
                             <p>
                                 @an.AContent</p>
                         </div>                   

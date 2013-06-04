@@ -11,11 +11,15 @@ namespace TraCuuThuatNgu.Controllers
     [Authorize]
     public class AddContentController : Controller
     {
+        // Add content Model
+        AddContentModel model = new AddContentModel();
+
         //
         // GET: /AddContent/
         [HttpPost]
         public ActionResult Add(string def, string catagory, string exa, string keyword)
         {
+            // Create new UserContent Ojbect
             UserContent rawdata = new UserContent();
             rawdata.UserId = (Guid)Membership.GetUser().ProviderUserKey;
             rawdata.Catagory = !String.IsNullOrEmpty(catagory) ? catagory : "";
@@ -26,7 +30,7 @@ namespace TraCuuThuatNgu.Controllers
 
             string message = "";
 
-            AddContentModel model = new AddContentModel();
+            // Exce model function
             if (model.Add(rawdata) > 0)
             {
                 message = "SUCCESS";
@@ -44,22 +48,19 @@ namespace TraCuuThuatNgu.Controllers
         //GET: /AddContent/List
         public ActionResult Index(int? page)
         {
-            int pageNumber = page ?? 1;
-            AddContentModel model = new AddContentModel();
-
+            int pageNumber = page ?? 1;    
             Guid userId = (Guid)Membership.GetUser().ProviderUserKey;
-
+            // Exce model function
             ViewBag.AddContentList = model.GetAllAddContentByUser(pageNumber, 10, userId);
 
             return View();
         }
 
-        //delete add content
+        // Delete add content
         [HttpPost]
         public ActionResult Delete(int rawDataId)
         {
-            AddContentModel addContentModel = new AddContentModel();
-            int result = addContentModel.DeleteAddContent(rawDataId);
+            int result = model.DeleteAddContent(rawDataId);
             if (result > 0)
             {
                 return Json(new { message = "SUCCESS" });

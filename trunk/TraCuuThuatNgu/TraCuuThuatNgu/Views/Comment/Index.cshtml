@@ -34,11 +34,14 @@
                         <th width="10%">
                             Người dùng
                         </th>
-                        <th width="40%">
+                        <th width="30%">
                             Nội dung
                         </th>
                         <th width="20%">
                             Thuật ngữ
+                        </th>
+                        <th width="10%">
+                            Báo sai phạm
                         </th>
                         <th width="20%">
                             Thời gian
@@ -60,6 +63,9 @@
                             </td>
                             <td>
                                 <a href="/ManageEntries/Edit?headWord=@item.HeadWord">@item.HeadWord</a>
+                            </td>
+                            <td>
+                                @item.Reported
                             </td>
                             <td>
                                 @String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)

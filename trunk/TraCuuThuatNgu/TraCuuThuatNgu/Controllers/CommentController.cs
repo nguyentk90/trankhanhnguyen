@@ -12,8 +12,9 @@ namespace TraCuuThuatNgu.Controllers
    
     public class CommentController : Controller
     {
-        //DbContext
-        TraCuuThuatNguEntities context = new TraCuuThuatNguEntities();
+        //Comment model
+        CommentModel commentModel = new CommentModel();
+
 
         //
         // GET: /Comment/     
@@ -24,7 +25,7 @@ namespace TraCuuThuatNgu.Controllers
 
             int size = 10;
 
-            CommentModel commentModel = new CommentModel();
+            
                         
             CommentsViewModel viewModel = new CommentsViewModel();
             viewModel.Comments = commentModel.GetCommentPaged(pageNumber, size);
@@ -46,10 +47,11 @@ namespace TraCuuThuatNgu.Controllers
             cmt.HeadWord = headWord;
             cmt.CmContent = content;
             cmt.DateAdd = DateTime.Now;
-            cmt.UserId = userGuid;            
+            cmt.UserId = userGuid;
+            cmt.Reported = 0;
 
-            context.Comments.Add(cmt);
-            context.SaveChanges();
+            commentModel.Add(cmt);
+
             return Redirect("/Result?keyword=" + headWord);
         }
 
@@ -61,6 +63,24 @@ namespace TraCuuThuatNgu.Controllers
         {            
             CommentModel cmModel = new CommentModel();
             if (cmModel.Delete(commentId) > 0)
+            {
+                return Json(new { message = "SUCCESS" });
+            }
+            else
+            {
+                return Json(new { message = "FAIL" });
+            }
+        }
+
+
+        //
+        // POST: /Report Comment        
+        [HttpPost]
+        [Authorize]
+        public ActionResult Report(int commentId)
+        {
+            CommentModel cmModel = new CommentModel();
+            if (cmModel.Report(commentId) > 0)
             {
                 return Json(new { message = "SUCCESS" });
             }

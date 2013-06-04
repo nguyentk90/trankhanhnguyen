@@ -11,7 +11,7 @@
         <div class="clear">
         </div>
     </div>
-    <div class="block">
+    <div style="min-height:200px;" class="block">
         <div class="first-result">
             @if (Model.Entry != null)
             {
@@ -104,6 +104,31 @@
                 </p>
                 }
             }
+            @if (ViewBag.Adj != null)
+            {
+                <h3 style="color: #f89406">
+                    Tính từ</h3>
+                foreach (var item in ViewBag.Adj)
+                {
+                <span class="ic-arrow-right"></span>
+                <p>
+                    <span class="synset">
+                        @foreach (var entry in item.WordIndexes)
+                        {
+                            if (entry.HeadWord.Equals(Model.Entry.HeadWord))
+                            {
+                            <span class="synset-item">@entry.HeadWord</span>
+                            }
+                            else
+                            {
+                            <span class="synset-item"><a class="btn-link" href="/Result?keyword=@entry.HeadWord">@entry.HeadWord</a></span>
+                            }
+                        }: </span>
+                    <script>                        $("span span").last().removeClass('synset-item');</script>
+                    <span class="def">@item.Def</span> <span class="exa">Ví dụ: @item.Exa</span>
+                </p>
+                }
+            }
         </div>
         @if (Model.Entry != null)
         {
@@ -111,7 +136,7 @@
         </div>
             }
         @* Suggest when keyword not found*@ 
-        <div class="description-result">
+        @*<div class="description-result">
             <span class="ic-cloud"></span>
             @if (Model.Entry == null)
             {
@@ -127,7 +152,7 @@
                 }
             }
              <script>                 $("a").last().removeClass('suggest-comma');</script>
-        </div>
+        </div>*@
               
         
         @if (Model.Entry != null)
@@ -151,6 +176,9 @@
                             {                        
                                 <input name="headWord" type="hidden" value='@Request.Params["keyword"].ToString()' />
                                 <textarea name="content" id="comment-content" class="text"></textarea>
+                                
+                                //check Authenticate
+                                <input type="hidden" value="true" id="checkAuthenComment" />
                             }
                             else
                             { 
@@ -187,8 +215,8 @@
                                 <img src="../Content/img/users/noAvatar.gif" class="img-polaroid"></a>
                             <div class="text">
                                 <div class="info">
-                                    <span class="name">@item.aspnet_Users.UserName</span> <a style="float:right;margin-left:10px" title="Báo cáo sai phạm" class="btn-report mark-report" data-val="@item.CommentId"  href="">
-                                    </a><span class="date">@item.DateAdd</span>
+                                    <span class="name">@item.aspnet_Users.UserName</span> <a style="float:right;margin-left:10px" title="Báo cáo sai phạm" class="btn-report mark-report" data-val="@item.CommentId"  href="javascript:">
+                                    </a><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)</span>
                                     <div class="clear">
                                     </div>
                                 </div>

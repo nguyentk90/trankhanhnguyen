@@ -330,6 +330,40 @@
         });
 
 
+
+        //----------------------------------
+        // Report comment
+        $(".mark-report").click(function(){
+            
+            var checkAuthen = $("#checkAuthenComment").val();
+
+            if(checkAuthen=='true')
+            {
+               $.ajax({
+                url: '/Comment/Report',
+                type: 'POST',
+                data: "{ 'commentId': '" + $(this).attr('data-val') + "'}",
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    if (data.message == 'SUCCESS') {                        
+                        alert("Bạn đã báo cáo vi phạm nội dung này.");
+                    } else {
+                        alert("Lỗi");
+                    } 
+                },
+                error: function () {
+                    alert("error");
+                }
+            });      
+            }
+            else
+            {
+                alert('Bạn cần đăng nhập để dùng chức năng này.');
+            }
+        
+        });
+
+
 });
 
 
