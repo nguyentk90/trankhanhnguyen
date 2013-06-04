@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using PagedList;
+using System.Data;
 
 namespace TraCuuThuatNgu.Models
 {
@@ -27,6 +28,24 @@ namespace TraCuuThuatNgu.Models
         {
             Comment cm = context.Comments.Find(commentId);
             context.Comments.Remove(cm);
+            return context.SaveChanges();
+        }
+
+
+        // Report comment by commnetId
+        public int Report(int commentId)
+        {
+            Comment cm = context.Comments.Find(commentId);
+            cm.Reported++;
+            context.Entry(cm).State = EntityState.Modified;
+            return context.SaveChanges();
+        }
+
+
+        // Add comment
+        public int Add(Comment cmt)
+        {
+            context.Comments.Add(cmt);
             return context.SaveChanges();
         }
     }

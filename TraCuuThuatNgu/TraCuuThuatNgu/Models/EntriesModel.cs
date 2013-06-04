@@ -331,6 +331,7 @@ namespace TraCuuThuatNgu.Models
                     // Remove PK
                     context.Comments.Delete(x => x.HeadWord == headWord);
                     context.Favorites.Delete(x => x.HeadWord == headWord);
+
                 }
                 if (synset.WordIndexes.Count == 0)
                 {

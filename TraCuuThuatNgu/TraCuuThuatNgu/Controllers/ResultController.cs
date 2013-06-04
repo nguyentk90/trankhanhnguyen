@@ -43,6 +43,8 @@ namespace TraCuuThuatNgu.Controllers
                     ViewBag.Noun = entry.Synsets.Where(x => x.Category == "n");
                 if (entry.Synsets.Where(x => x.Category == "v").Count() > 0)
                     ViewBag.Verb = entry.Synsets.Where(x => x.Category == "v");
+                if (entry.Synsets.Where(x => x.Category == "a").Count() > 0)
+                    ViewBag.Adj = entry.Synsets.Where(x => x.Category == "a");
 
                 //add history
                 isExistData = true;
@@ -84,12 +86,8 @@ namespace TraCuuThuatNgu.Controllers
             }
             ((List<string>)Session["Recent"]).Add(keyword);
 
-            //((List<string>)Session["Recent"]).Reverse();
-            //string[] arraySuggest = new string[((List<string>)Session["Recent"]).Count];
-            //((List<string>)Session["Recent"]).CopyTo(arraySuggest);
-            //ViewBag.Recent = arraySuggest;
-            //((List<string>)Session["Recent"]).Reverse();
             //---------------------------------------
+
 
             //ViewBag.Title
             ViewBag.Title = "Kết quả tra cứu cho '"+keyword+"'";

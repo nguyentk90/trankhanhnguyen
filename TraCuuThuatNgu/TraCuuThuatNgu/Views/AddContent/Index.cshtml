@@ -56,7 +56,13 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var item in ViewBag.AddContentList)
+            @if (ViewBag.AddContentList == null)
+            { 
+              
+            }
+            else
+            {
+                foreach (var item in ViewBag.AddContentList)
                 {
                     <tr>
                         <td>
@@ -77,11 +83,16 @@
                         </td>
                     </tr>
                 }
+            }
             </tbody>
         </table>
+        @if (ViewBag.AddContentList != null)
+        {
         <div class="view-more">
+         
             @Html.PagedListPager((IPagedList)ViewBag.AddContentList, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })
             @*@Html.PagedListPager((IPagedList)Model.AllUserHistoryPaged, page => Url.Action("Index", new { page }))*@</div>
+        }
         <div class="clear">
         </div>
     </div>
