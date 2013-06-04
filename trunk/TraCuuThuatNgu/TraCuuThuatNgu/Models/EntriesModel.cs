@@ -30,8 +30,7 @@ namespace TraCuuThuatNgu.Models
         {
             return context.WordIndexes.Where(x => x.HeadWord.Contains(keyword)).OrderBy(x => x.HeadWord).ToPagedList(page, size);
         }
-
-
+        
 
         // Add new term or new synset
         public int AddNewTermOrSynset(AddTermViewModel term)
@@ -58,8 +57,7 @@ namespace TraCuuThuatNgu.Models
             }
             else
             {
-                // Check duplicate content
-                //var checkDup = checkTerm.Synsets.Contains(context.Synsets.Where(x => x.Def.Contains(term.Def)).FirstOrDefault());
+                // Check duplicate content                
                 bool checkDup2 = false;
                 foreach (var item in checkTerm.Synsets)
                 {
@@ -120,18 +118,7 @@ namespace TraCuuThuatNgu.Models
             return result;
         }
 
-        // Delete synset by synsetId
-        //public int DeleteSynsetBySynsetId(int synsetId, string headWord)
-        //{
-        //    Synset synset = context.Synsets.Find(synsetId);
 
-        //    WordIndex term = context.WordIndexes.Find(headWord);
-
-        //    term.Synsets.Remove(synset);
-        //    context.Synsets.Remove(synset);
-
-        //    return context.SaveChanges();
-        //}
 
 
         // Edit synset by synsetId
@@ -230,6 +217,7 @@ namespace TraCuuThuatNgu.Models
         // Get another synset of term
         public IEnumerable<Synset> GetAnotherSynsetOfTerm(string headWord, int synsetId)
         {
+            // Get default synset
             if (synsetId == -1)
                 synsetId = context.WordIndexes.Find(headWord).Synsets.FirstOrDefault().SynsetId;
 
@@ -331,7 +319,6 @@ namespace TraCuuThuatNgu.Models
                     // Remove PK
                     context.Comments.Delete(x => x.HeadWord == headWord);
                     context.Favorites.Delete(x => x.HeadWord == headWord);
-
                 }
                 if (synset.WordIndexes.Count == 0)
                 {

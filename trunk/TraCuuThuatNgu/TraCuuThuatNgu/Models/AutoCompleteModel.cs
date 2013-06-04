@@ -29,7 +29,7 @@ namespace TraCuuThuatNgu.Models
             }
             else
             {
-                // Get suggest from Entries
+                // Get suggest from Entries except from Search History list
                 var suggestWordsFromEntries = AutoCompelte_(prefix, 10 - count);
 
                 // Add to list
