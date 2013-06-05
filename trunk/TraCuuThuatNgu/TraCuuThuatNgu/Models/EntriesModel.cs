@@ -107,14 +107,18 @@ namespace TraCuuThuatNgu.Models
                             wordIndex.WordType = "s";
                         }
                     }
+                    if(checkTerm.HeadWord!=headWord)
                     synset.WordIndexes.Add(wordIndex);
                 }
             }
 
             // 
             synset.WordIndexes.Add(checkTerm);
+
             context.Synsets.Add(synset);
+
             int result = context.SaveChanges();
+
             return result;
         }
 

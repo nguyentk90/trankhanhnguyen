@@ -19,7 +19,7 @@ namespace TraCuuThuatNgu.Controllers
         //
         // GET: /Comment/     
          [Authorize(Roles = "Admin")]
-        public ActionResult Index(int? page)
+        public ActionResult Index(int? page, string report)
         {
             var pageNumber = page??1;
 
@@ -28,7 +28,14 @@ namespace TraCuuThuatNgu.Controllers
             
                         
             CommentsViewModel viewModel = new CommentsViewModel();
-            viewModel.Comments = commentModel.GetCommentPaged(pageNumber, size);
+            if (String.IsNullOrWhiteSpace(report))
+            {
+                viewModel.Comments = commentModel.GetCommentPaged(pageNumber, size);
+            }
+            else
+            {
+                viewModel.Comments = commentModel.GetCommentReportedPaged(pageNumber, size);
+            }
 
             return View(viewModel);
         }
@@ -81,6 +88,24 @@ namespace TraCuuThuatNgu.Controllers
         {
             CommentModel cmModel = new CommentModel();
             if (cmModel.Report(commentId) > 0)
+            {
+                return Json(new { message = "SUCCESS" });
+            }
+            else
+            {
+                return Json(new { message = "FAIL" });
+            }
+        }
+
+
+        //
+        // POST: /ClearReport Comment        
+        [HttpPost]
+        [Authorize(Roles = "Admin")]
+        public ActionResult ClearReport(int commentId)
+        {
+            CommentModel cmModel = new CommentModel();
+            if (cmModel.ClearReport(commentId) > 0)
             {
                 return Json(new { message = "SUCCESS" });
             }

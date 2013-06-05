@@ -1,8 +1,12 @@
-﻿@model IEnumerable<TraCuuThuatNgu.Models.Question>
+﻿@{
+    ViewBag.Title = "Quản lý hỏi đáp";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+@model IEnumerable<TraCuuThuatNgu.Models.Question>
 <style type="text/css">
     .wrap-qa
     {
-        width: 300px;
+        width: 100%;
         padding: 5px 10px;
     }
     .wrap-qa .dr
@@ -37,16 +41,17 @@
     }
     .input-question
     {
-        text-align: right;
+        /*text-align: right;*/
     }
     .input-question textarea
     {
         padding: 5px;
-        width: 285px;
+        width: 400px;
         min-height: 50px;
         border: 1px solid #ccc;
         border-radius: 6px;
         font-size: 13px;
+        display: block;
     }
     
     .question-item-content
@@ -121,6 +126,15 @@
         background-color: #fff;
         border: 1px solid #ccc;
     }
+    
+    .an-dialog
+    {
+        width: 300px;
+    }
+    .an-dialog textarea
+    {
+        width: 290px;
+    }
 </style>
 <!--Add script to update the page and send messages.-->
 <script type="text/javascript">
@@ -167,7 +181,7 @@
 
         // Start the connection.
         $.connection.hub.start().done(function () {
-            
+
             $('#sendquestion').click(function () {
 
 
@@ -223,8 +237,8 @@
                 + '<a href="javascript:" class="btn-link an-btn-close">Đóng</a>'
                 + '</div>');
 
-                $('.an-dialog').css("top", pageY + 20 + "px");
-                $('.an-dialog').css("left", pageX - 200 + "px");
+                $('.an-dialog').css("top", pageY - 40 + "px");
+                $('.an-dialog').css("left", pageX - 520 + "px");
                 $('.an-dialog').slideDown('slow');
 
                 $("#an-content").focus();
@@ -266,7 +280,7 @@
 <div class="wrap-qa">
     <div class="input-question">
         <textarea id="questioncontent" placeholder="Nhập câu hỏi..."></textarea>
-        <input type="button" class="btn" id="sendquestion" value="Gửi" />
+        <input type="button" class="btn" style="display: block" id="sendquestion" value="Gửi" />
         @if (Request.IsAuthenticated)
         {        
             <input type="hidden" id="checkAuthen" name="checkAuthen" value="true" />
@@ -286,9 +300,9 @@
                 <div class="question-item-content">
                     <p>
                         <span class="username">@item.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)</span>
-                        <a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-q" data-val=""  href="javascript:">
-                                    </a>
-                        </p>
+                        <a style="float: right; margin-right: 5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-q"
+                            data-val="" href="javascript:"></a>
+                    </p>
                     <p>
                         @item.QContent</p>
                     <p style="text-align: right">
@@ -299,12 +313,10 @@
                     {
                         <div class="answer-item">
                             <p>
-                                <span class="username-a">@an.aspnet_Users.UserName</span>
-                                
-                                <span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span>
-                                <a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-a" data-val=""  href="javascript:">
-                                    </a>
-                                </p>
+                                <span class="username-a">@an.aspnet_Users.UserName</span> <span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span>
+                                <a style="float: right; margin-right: 5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-a"
+                                    data-val="" href="javascript:"></a>
+                            </p>
                             <p>
                                 @an.AContent</p>
                         </div>                   

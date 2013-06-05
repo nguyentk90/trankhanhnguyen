@@ -15,7 +15,9 @@ namespace TraCuuThuatNgu.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            // get questions
+            QAModel qaModel = new QAModel();            
+            return View(qaModel.GetQuestionPaged(1, 5));
         }
 
         [HttpPost]
@@ -37,20 +39,18 @@ namespace TraCuuThuatNgu.Controllers
 
                 foreach (var item in list)
                 {
-                   
-
                     QuestionJSON q = new QuestionJSON();
                     q.QContent = item.QContent;
                     q.Qid = item.QuestionId;
                     q.Username = item.aspnet_Users.UserName;
-                    q.DateAdd = @String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd);
+                    q.DateAdd = String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd);
                     foreach (var i in item.Answers)
                     {
                         AnswerJSON a = new AnswerJSON();
                         a.AContent = i.AContent;
                         a.Qid = i.QuestionId;
                         a.Username = i.aspnet_Users.UserName;
-                        a.DateAdd = @String.Format("{0:d/M/yyyy HH:mm}", i.DateAdd);
+                        a.DateAdd = String.Format("{0:d/M/yyyy HH:mm}", i.DateAdd);
                         q.AList.Add(a);
                     }
                     question.Add(q);

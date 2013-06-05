@@ -18,14 +18,18 @@
     <div class="dr">
         <span></span>
     </div>
-    
     <div class="span span12">
         <div class="head">
             <div class="icm-chats">
             </div>
             <h1>
-                Danh sách bình luận</h1>   
-                <div class="clear"></div>         
+                Danh sách bình luận</h1>
+                
+                <a style="float:right; color:#fff; margin-top:5px; margin-right:10px" href="/Comment?report=check">Bình luận bị báo cáo</a>
+                <span style="float:right; color:#fff; margin:5px 5px;" >|</span>
+                <a style="float:right; color:#fff; margin-top:5px;" href="/Comment">Tất cả</a>                
+            <div class="clear">
+            </div>
         </div>
         <div class="block">
             <table cellpadding="0" cellspacing="0" width="100%" class="table">
@@ -39,48 +43,75 @@
                         </th>
                         <th width="20%">
                             Thuật ngữ
-                        </th>
-                        <th width="10%">
-                            Báo sai phạm
-                        </th>
+                        </th>                        
                         <th width="20%">
                             Thời gian
                         </th>
                         <th width="10%">
-                           <center>Thao tác</center> 
+                            <center>
+                                Thao tác</center>
                         </th>
                     </tr>
                 </thead>
                 <tbody>
                     @foreach (var item in Model.Comments)
                     {
-                        <tr>
+                        if (item.Reported > 0)
+                        {
+                        <tr class="reported">
                             <td>
                                 @item.aspnet_Users.UserName
                             </td>
                             <td>
-                                @item.CmContent
+                                @if (item.Reported > 0)
+                                { 
+                                    <span style="margin-right:10px" class="label label-success">@item.Reported </span>
+                                }
+                                <span>@item.CmContent </span>
                             </td>
                             <td>
                                 <a href="/ManageEntries/Edit?headWord=@item.HeadWord">@item.HeadWord</a>
-                            </td>
-                            <td>
-                                @item.Reported
-                            </td>
+                            </td>                           
                             <td>
                                 @String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)
                             </td>
                             <td align="center">
-                               <a class="btn-delete btn-comment-delete" href="#" title="Xóa" >
+                            <a class="btn-accept btn-accept-cm" href="javascript:" title="Duyệt">
                                     <input type="hidden" value="@item.CommentId" />
-                               </a>
+                                </a>
+                                <a class="btn-delete btn-comment-delete" href="javascript:" title="Xóa">
+                                    <input type="hidden" value="@item.CommentId" />
+                                </a>
                             </td>
                         </tr>
+                        }
+                        else
+                        { 
+                        <tr>
+                            <td>
+                                @item.aspnet_Users.UserName
+                            </td>
+                            <td>                               
+                               @item.CmContent
+                            </td>
+                            <td>
+                                <a href="/ManageEntries/Edit?headWord=@item.HeadWord">@item.HeadWord</a>
+                            </td>                           
+                            <td>
+                                @String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)
+                            </td>
+                            <td align="center">                                
+                                <a class="btn-delete btn-comment-delete" href="javascript:" title="Xóa">
+                                    <input type="hidden" value="@item.CommentId" />
+                                </a>
+                            </td>
+                        </tr>
+                        }
                     }
                 </tbody>
             </table>
-            <div class="view-more">
-                @Html.PagedListPager((IPagedList)Model.Comments, page => Url.Action("Index", new { page = page, orderby = Request.QueryString["orderby"] }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })</div>
+            <div class="view-more">            
+                @Html.PagedListPager((IPagedList)Model.Comments, page => Url.Action("Index", new { page = page, report = Request.QueryString["report"] }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })</div>
             <div class="clear">
             </div>
         </div>

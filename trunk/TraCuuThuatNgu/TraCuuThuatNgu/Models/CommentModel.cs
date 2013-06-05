@@ -20,6 +20,12 @@ namespace TraCuuThuatNgu.Models
             return context.Comments.OrderByDescending(x => x.DateAdd).ToPagedList(page, size);
         }
 
+        // View all comment were reported
+        public IPagedList<Comment> GetCommentReportedPaged(int page, int size)
+        {
+            return context.Comments.Where(x=>x.Reported>0).OrderByDescending(x => x.DateAdd).ToPagedList(page, size);            
+        }
+
 
         // View all comment of special user
         public IPagedList<Comment> GetCommentPagedByUser(int page, int size, Guid UserId)
@@ -79,6 +85,25 @@ namespace TraCuuThuatNgu.Models
                 return -1;
             }
 
+        }
+
+        // Clear reported
+        public int ClearReport(int commentId)
+        {
+            try
+            {
+                Comment cmt = context.Comments.Find(commentId);
+                cmt.Reported = 0;
+                context.Entry(cmt).State = EntityState.Modified;
+
+                return context.SaveChanges();
+            }
+            catch (EntitySqlException ex)
+            {
+                Debug.WriteLine(ex.ToString());
+                return -1;
+            }
+        
         }
     }
 }
