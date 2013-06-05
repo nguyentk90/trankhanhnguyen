@@ -396,6 +396,7 @@
     <Content Include="Views\UserHistory\Index.cshtml" />
     <Content Include="Views\Users\Detail.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
+    <Content Include="Views\QA\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

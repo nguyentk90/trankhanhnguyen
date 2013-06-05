@@ -91,6 +91,33 @@ $(document).ready(function () {
         }
     });
 
+    // Clear reported comment
+    $(".btn-accept-cm").click(function () {
+
+
+        var row = $(this).parent().parent();
+
+        $.ajax({
+            url: '/Comment/ClearReport',
+            type: 'POST',
+            data: "{ 'commentId': '" + $(this).children().val() + "'}",
+            contentType: 'application/json; charset=utf-8',
+            success: function (data) {
+                if (data.message == 'SUCCESS') {
+                    row.removeClass('reported');
+                    row.children().find('.label-success').remove();
+                    row.children().find('.btn-accept-cm').remove();                    
+                } else {
+                    alert("Lỗi");
+                }
+            },
+            error: function () {
+                alert("error");
+            }
+        });
+
+    });
+
 
     // Delete search history
     $(".btn-search-history-delete").click(function () {

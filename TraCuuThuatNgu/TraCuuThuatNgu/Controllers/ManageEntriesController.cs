@@ -118,7 +118,7 @@ namespace TraCuuThuatNgu.Controllers
             int result = entriesModel.EditSynsetBySynsetId(editedSynset, synsetId);
             ViewBag.Result = result;
             return RedirectToAction("Edit", new { synsetId = synsetId, headWord = editedSynset.HeadWord, r = "success" });
-            //return View();
+            
         }
 
 

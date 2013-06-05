@@ -1044,6 +1044,14 @@ table
     padding-left: 18px;
     font-size: 16px;
 }
+
+.btn-accept
+{
+    background: url('img/check.png') left center no-repeat transparent;
+    padding-left: 18px;
+    font-size: 16px;
+}
+
 .btn-report
 {
     background: url('img/icons/caution.png') left center no-repeat transparent;
@@ -1200,4 +1208,9 @@ table
 .suggest-comma:after
 {
 	content:',';
+}
+/* Comment reported and QA reported*/
+.reported
+{
+    background-color:#E8ADAA;
 }
