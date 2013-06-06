@@ -149,7 +149,9 @@
             var newItem = '<div style="display:none" class="question-item">'
                                 + '<div class="question-item-content">'
                                     + '<p>'
-                                        + '<span class="username">' + username + '</span><span class="date">' + date + '</span></p>'
+                                        + '<span class="username">' + username + '</span><span class="date">' + date + '</span>'
+                                        + '<a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-q" data-val=""  href="javascript:">'
+                                    + '</a></p>'
                                     + '<p>'
                                         + content + '</p>'
                                     + '<p style="text-align: right">'
@@ -170,6 +172,8 @@
                                         + '<p>'
                                             + '<span class="username-a">' + username + '</span>'
                                             + '<span class="date">' + date + '</span>'
+                                            + '<a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-a" data-val=""  href="javascript:">'
+                                            + '</a>'
                                             + '</p>'
                                         + '<p>' + content + '</p>'
                                     + '</div>';
@@ -279,7 +283,7 @@
 </script>
 <div class="wrap-qa">
     <div class="input-question">
-        <textarea id="questioncontent" placeholder="Nhập câu hỏi..."></textarea>
+        <textarea id="questioncontent" placeholder="Nhập thông báo..."></textarea>
         <input type="button" class="btn" style="display: block" id="sendquestion" value="Gửi" />
         @if (Request.IsAuthenticated)
         {        

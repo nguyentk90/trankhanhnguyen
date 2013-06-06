@@ -23,10 +23,9 @@ namespace TraCuuThuatNgu.Models
         // View all comment were reported
         public IPagedList<Comment> GetCommentReportedPaged(int page, int size)
         {
-            return context.Comments.Where(x=>x.Reported>0).OrderByDescending(x => x.DateAdd).ToPagedList(page, size);            
+            return context.Comments.Where(x=>x.Reported>0).OrderByDescending(x => x.Reported).ToPagedList(page, size);            
         }
-
-
+        
         // View all comment of special user
         public IPagedList<Comment> GetCommentPagedByUser(int page, int size, Guid UserId)
         {

@@ -66,7 +66,7 @@ namespace TraCuuThuatNgu.Controllers
 
     }
 
-    // extra classes
+    // Extra classes
     public class QuestionJSON
     {
         public QuestionJSON()
