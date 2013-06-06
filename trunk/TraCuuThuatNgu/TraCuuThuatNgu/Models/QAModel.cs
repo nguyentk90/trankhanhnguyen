@@ -36,5 +36,15 @@ namespace TraCuuThuatNgu.Models
         {
             return context.Questions.Count();
         }
+
+        // Report question
+        public int ReportQuestion(int questionId)
+        {
+            Question q = context.Questions.Find(questionId);
+            q.Reported++;
+            context.Entry(q).State = System.Data.EntityState.Modified;
+
+            return context.SaveChanges();
+        }
     }
 }

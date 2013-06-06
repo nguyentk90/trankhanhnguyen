@@ -135,11 +135,13 @@
             var newItem = '<div style="display:none" class="question-item">'
                                 + '<div class="question-item-content">'
                                     + '<p>'
-                                        + '<span class="username">' + username + '</span><span class="date">' + date + '</span></p>'
+                                    + '<span class="username">' + username + '</span><span class="date">' + date + '</span>'
+                                    + '<a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-q" data-val=""  href="javascript:">'
+                                    + '</a></p>'
                                     + '<p>'
-                                        + content + '</p>'
+                                    + content + '</p>'
                                     + '<p style="text-align: right">'
-                                        + '<a class="btn-answer" data-qid="' + qid + '" href="javascript:">Trả lời</a></p>'
+                                    + '<a class="btn-answer" data-qid="' + qid + '" href="javascript:">Trả lời</a></p>'
                                 + '</div>'
                                 + '<div id="' + qid + '" class="answer-list">'
                                 + '</div>'
@@ -156,6 +158,8 @@
                                         + '<p>'
                                             + '<span class="username-a">' + username + '</span>'
                                             + '<span class="date">' + date + '</span>'
+                                            + '<a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-a" data-val=""  href="javascript:">'
+                                            + '</a>'
                                             + '</p>'
                                         + '<p>' + content + '</p>'
                                     + '</div>';
@@ -232,7 +236,6 @@
             } else {
                 alert("Bạn cần đăng nhập để sử dụng chức năng này!");
             }
-
         });
 
         // Close answer dialog
@@ -240,7 +243,7 @@
             $(this).parent().remove();
         });
 
-        //------------------------------
+        // ------------------------------
         // Report question or answer
         // show report icon Answer
         $(".answer-item").live('hover', function () {
@@ -261,6 +264,9 @@
         $(".question-item-content").live('mouseleave', function () {
             $(this).find(".mark-report-q").hide();
         });
+
+
+
     });
 </script>
 <div class="wrap-qa">
@@ -299,8 +305,7 @@
                     {
                         <div class="answer-item">
                             <p>
-                                <span class="username-a">@an.aspnet_Users.UserName</span>
-                                
+                                <span class="username-a">@an.aspnet_Users.UserName</span>                                
                                 <span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span>
                                 <a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-a" data-val=""  href="javascript:">
                                     </a>
