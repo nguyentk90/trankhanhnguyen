@@ -3,6 +3,8 @@
     Layout = "~/Views/Shared/_Admin.cshtml";
 }
 @model IEnumerable<TraCuuThuatNgu.Models.Question>
+@using PagedList.Mvc;
+@using PagedList;
 <style type="text/css">
     .wrap-qa
     {
@@ -107,8 +109,7 @@
         border-top-right-radius: 6px;
     }
     .answer-item .username-a
-    {
-        /*background: url('/Content/img/icons/speech-balloon-green-a-icon.png') left center no-repeat transparent;*/ /*padding-left: 18px;*/
+    {       
         font-weight: bold;
         color: #000;
     }
@@ -135,6 +136,10 @@
     {
         width: 290px;
     }
+    .qa
+    {
+        display: none;
+    }
 </style>
 <!--Add script to update the page and send messages.-->
 <script type="text/javascript">
@@ -144,8 +149,14 @@
         var chat = $.connection.chatHub;
         // Create a function that the hub can call to broadcast messages.
 
+        chat.client.getNewReportNotify = function () {
+            $("#notifyReport").html('<a class="notify-report-link" href="/QA">Có báo cáo nội dung xấu mới!</a>');
+        }
+
+
         chat.client.newQuestion = function (username, content, type, qid, date) {
 
+            // New question
             var newItem = '<div style="display:none" class="question-item">'
                                 + '<div class="question-item-content">'
                                     + '<p>'
@@ -160,6 +171,7 @@
                                 + '<div id="' + qid + '" class="answer-list">'
                                 + '</div>'
                                         + '</div>';
+            // Add new question
             $(newItem).prependTo('.question-list').fadeIn('slow');
 
         };
@@ -167,7 +179,7 @@
 
         chat.client.newAnswer = function (username, content, type, qid, date) {
 
-            //Add the message to the page. 
+            // New answer 
             var newItem = '<div style="display:none" class="answer-item">'
                                         + '<p>'
                                             + '<span class="username-a">' + username + '</span>'
@@ -177,6 +189,7 @@
                                             + '</p>'
                                         + '<p>' + content + '</p>'
                                     + '</div>';
+            // Add new answer
             $(newItem).appendTo('#' + qid).fadeIn('slow');
         };
 
@@ -186,8 +199,11 @@
         // Start the connection.
         $.connection.hub.start().done(function () {
 
-            $('#sendquestion').click(function () {
+            // Connect --add connectionId to Admin's group.
+            chat.server.connect('admin');
 
+            // Send a question
+            $('#sendquestion').click(function () {
 
                 if (checkAuthen == 'true') {
 
@@ -205,10 +221,10 @@
                     alert("Bạn cần đăng nhập để sử dụng chức năng này!");
                 }
             });
+            // ---end
 
-            // send to server
+            // Answer a question -- send to server
             $("#btn-an").live('click', function () {
-
 
                 var answer_content = $("#an-content").val();
                 var qid = $(this).attr('data-qid');
@@ -221,9 +237,41 @@
                 }
 
             });
+            // ---end
+
+
+            // Clear Report          
+            $(".btn-accept-qa").live('click', function () {
+
+                var type = $(this).attr('data-type');
+                var id = $(this).attr('data-val');
+                // Send to server
+                chat.server.clearReport(type, id);
+                $(this).parent().parent().removeClass('reported');
+                $(this).remove();
+            });
+            // ---end
+
+
+            // Delete question or answer
+            $(".btn-delete-qa").live('click', function () {
+
+                var type = $(this).attr('data-type');
+                var id = $(this).attr('data-val');
+                // Send to server to delete
+                chat.server.deleteQA(type, id);
+
+                // Remove from view
+                if (type == 'Q') {
+                    $(this).parent().parent().parent().fadeOut('slow');
+                } else {
+                    $(this).parent().parent().fadeOut('slow');
+                }
+            });
 
         });
 
+        // Open answer dialog
         $(".btn-answer").live('click', function (e) {
             if (checkAuthen == 'true') {
 
@@ -262,22 +310,22 @@
         // Report question or answer
         // show report icon Answer
         $(".answer-item").live('hover', function () {
-            $(this).find(".mark-report-a").show();
+            $(this).find(".qa").show();
         });
 
         // hide report icon Answer
         $(".answer-item").live('mouseleave', function () {
-            $(this).find(".mark-report-a").hide();
+            $(this).find(".qa").hide();
         });
 
         // show report icon Question
         $(".question-item-content").live('hover', function () {
-            $(this).find(".mark-report-q").show();
+            $(this).find(".qa").show();
         });
 
         // hide report icon Question
         $(".question-item-content").live('mouseleave', function () {
-            $(this).find(".mark-report-q").hide();
+            $(this).find(".qa").hide();
         });
     });
 </script>
@@ -285,6 +333,7 @@
     <div class="input-question">
         <textarea id="questioncontent" placeholder="Nhập thông báo..."></textarea>
         <input type="button" class="btn" style="display: block" id="sendquestion" value="Gửi" />
+        <div id="notifyReport"></div>
         @if (Request.IsAuthenticated)
         {        
             <input type="hidden" id="checkAuthen" name="checkAuthen" value="true" />
@@ -301,38 +350,72 @@
         @foreach (var item in Model)
         {
             <div class="question-item">
-                <div class="question-item-content">
-                    <p>
-                        <span class="username">@item.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)</span>
-                        <a style="float: right; margin-right: 5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-q"
-                            data-val="" href="javascript:"></a>
-                    </p>
-                    <p>
-                        @item.QContent</p>
-                    <p style="text-align: right">
-                        <a class="btn-answer" data-qid="@item.QuestionId" href="javascript:">Trả lời</a></p>
-                </div>
+                @if (item.Reported > 0)
+                {
+                    <div class="question-item-content reported">
+                        <p>
+                            <span class="username">@item.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)</span>
+                            <a class="btn-accept btn-accept-qa qa" data-val="@item.QuestionId" data-type="Q" href="javascript:" title="Duyệt">
+                            </a><a class="btn-delete btn-delete-qa qa" data-val="@item.QuestionId" data-type="Q" href="javascript:" title="Xóa">
+                            </a>
+                        </p>
+                        <p>
+                            @item.QContent</p>
+                        <p style="text-align: right">
+                            <a class="btn-answer" data-qid="@item.QuestionId" href="javascript:">Trả lời</a></p>
+                    </div>
+                }
+                else
+                {
+                    <div class="question-item-content">
+                        <p>
+                            <span class="username">@item.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)</span>
+                            <a class="btn-delete btn-delete-qa qa" data-val="@item.QuestionId" data-type="Q" href="javascript:" title="Xóa">
+                            </a>
+                        </p>
+                        <p>
+                            @item.QContent</p>
+                        <p style="text-align: right">
+                            <a class="btn-answer" data-qid="@item.QuestionId" href="javascript:">Trả lời</a></p>
+                    </div>
+                }
                 <div id="@item.QuestionId" class="answer-list">
                     @foreach (var an in item.Answers)
                     {
-                        <div class="answer-item">
+                        if (@an.Reported > 0)
+                        {
+                        <div class="answer-item reported">
                             <p>
                                 <span class="username-a">@an.aspnet_Users.UserName</span> <span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span>
-                                <a style="float: right; margin-right: 5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-a"
-                                    data-val="" href="javascript:"></a>
+                                <a class="btn-accept btn-accept-qa qa" data-val="@an.AnswerId" data-type="A" href="javascript:" title="Duyệt">
+                                </a><a class="btn-delete btn-delete-qa qa" data-val="@an.AnswerId" data-type="A" href="javascript:" title="Xóa">
+                                </a>
                             </p>
                             <p>
                                 @an.AContent</p>
-                        </div>                   
+                        </div>   
+                        }
+                        else
+                        {
+                        
+                        <div class="answer-item">
+                            <p>
+                                <span class="username-a">@an.aspnet_Users.UserName</span> <span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span>
+                                <a class="btn-delete btn-delete-qa qa" data-val="@an.AnswerId" data-type="A" href="javascript:" title="Xóa">
+                                </a>
+                            </p>
+                            <p>
+                                @an.AContent</p>
+                        </div>   
+                        }
+
                     }
                 </div>
             </div>        
         }
     </div>
-    <div style="text-align: center; margin-top: 10px;">
-        <a href="javascript:" id="btn-prev" class="btn-showmore">← Mới hơn</a> <span id="limit"
-            class="btn-showmore-count">1</span> <a href="javascript:" id="btn-next" class="btn-showmore">
-                Cũ hơn →</a>
-        <input type="hidden" value="" />
+    <div style="text-align: center; margin-top: 10px;">     
+        <div class="view-more">
+            @Html.PagedListPager((IPagedList)Model, page => Url.Action("Index", new { page = page }), new PagedListRenderOptions { LinkToFirstPageFormat = "<< Đầu tiên", LinkToPreviousPageFormat = "&larr; Trước", LinkToNextPageFormat = "Sau &rarr;", LinkToLastPageFormat = "&Uacute;Cuối >>" })</div>
     </div>
 </div>

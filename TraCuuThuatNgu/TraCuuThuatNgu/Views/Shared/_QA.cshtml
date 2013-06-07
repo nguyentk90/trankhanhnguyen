@@ -102,8 +102,7 @@
         border-top-right-radius: 6px;
     }
     .answer-item .username-a
-    {
-        /*background: url('/Content/img/icons/speech-balloon-green-a-icon.png') left center no-repeat transparent;*/ /*padding-left: 18px;*/
+    {        
         font-weight: bold;
         color: #000;
     }
@@ -126,17 +125,21 @@
 <script type="text/javascript">
 
     $(function () {
+
         // Declare a proxy to reference the hub. 
         var chat = $.connection.chatHub;
         // Create a function that the hub can call to broadcast messages.
+       
 
+        // New question
         chat.client.newQuestion = function (username, content, type, qid, date) {
 
+            // New question
             var newItem = '<div style="display:none" class="question-item">'
                                 + '<div class="question-item-content">'
                                     + '<p>'
                                     + '<span class="username">' + username + '</span><span class="date">' + date + '</span>'
-                                    + '<a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-q" data-val=""  href="javascript:">'
+                                    + '<a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-qa" data-type="Q" data-val="' + qid + '"  href="javascript:">'
                                     + '</a></p>'
                                     + '<p>'
                                     + content + '</p>'
@@ -146,34 +149,39 @@
                                 + '<div id="' + qid + '" class="answer-list">'
                                 + '</div>'
                                         + '</div>';
+            // Add new question
             $(newItem).prependTo('.question-list').fadeIn('slow');
 
         };
+        // ---end
 
+        // New answer
+        chat.client.newAnswer = function (username, content, type, qid, date, aid) {
 
-        chat.client.newAnswer = function (username, content, type, qid, date) {
-
-            //Add the message to the page. 
+            // New answer
             var newItem = '<div style="display:none" class="answer-item">'
                                         + '<p>'
                                             + '<span class="username-a">' + username + '</span>'
                                             + '<span class="date">' + date + '</span>'
-                                            + '<a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-a" data-val=""  href="javascript:">'
+                                            + '<a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-qa" data-type="A" data-val="' + aid + '"  href="javascript:">'
                                             + '</a>'
                                             + '</p>'
                                         + '<p>' + content + '</p>'
                                     + '</div>';
+            // Add new answer
             $(newItem).appendTo('#' + qid).fadeIn('slow');
         };
+        // ---end
+
 
         // Check Authenticate
         var checkAuthen = $("#checkAuthen").val();
 
         // Start the connection.
         $.connection.hub.start().done(function () {
-            
-            $('#sendquestion').click(function () {
 
+            // Send a question
+            $('#sendquestion').click(function () {
 
                 if (checkAuthen == 'true') {
 
@@ -191,10 +199,10 @@
                     alert("Bạn cần đăng nhập để sử dụng chức năng này!");
                 }
             });
+            // ---end
 
-            // send to server
+            // Answer a question -- send to server
             $("#btn-an").live('click', function () {
-
 
                 var answer_content = $("#an-content").val();
                 var qid = $(this).attr('data-qid');
@@ -207,9 +215,21 @@
                 }
 
             });
+            //  ---end
+
+            // Report
+            $(".mark-report-qa").live('click', function () {
+                var type = $(this).attr('data-type');
+                var id = $(this).attr('data-val');
+                chat.server.report(type, id);
+                alert('Bạn đã báo xấu nội dung này!');
+            });
+            // ---end
 
         });
+        // CLOSE -Start the connection.
 
+        // Open answer dialog
         $(".btn-answer").live('click', function (e) {
             if (checkAuthen == 'true') {
 
@@ -247,24 +267,23 @@
         // Report question or answer
         // show report icon Answer
         $(".answer-item").live('hover', function () {
-            $(this).find(".mark-report-a").show();
+            $(this).find(".mark-report-qa").show();
         });
 
         // hide report icon Answer
         $(".answer-item").live('mouseleave', function () {
-            $(this).find(".mark-report-a").hide();
+            $(this).find(".mark-report-qa").hide();
         });
 
         // show report icon Question
         $(".question-item-content").live('hover', function () {
-            $(this).find(".mark-report-q").show();
+            $(this).find(".mark-report-qa").show();
         });
 
         // hide report icon Question
         $(".question-item-content").live('mouseleave', function () {
-            $(this).find(".mark-report-q").hide();
+            $(this).find(".mark-report-qa").hide();
         });
-
 
 
     });
@@ -292,9 +311,9 @@
                 <div class="question-item-content">
                     <p>
                         <span class="username">@item.aspnet_Users.UserName</span><span class="date">@String.Format("{0:d/M/yyyy HH:mm}", item.DateAdd)</span>
-                        <a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-q" data-val=""  href="javascript:">
-                                    </a>
-                        </p>
+                        <a style="float: right; margin-right: 5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-qa"
+                            data-val="@item.QuestionId" data-type="Q" href="javascript:"></a>
+                    </p>
                     <p>
                         @item.QContent</p>
                     <p style="text-align: right">
@@ -305,11 +324,10 @@
                     {
                         <div class="answer-item">
                             <p>
-                                <span class="username-a">@an.aspnet_Users.UserName</span>                                
-                                <span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span>
-                                <a style="float:right;margin-right:5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-a" data-val=""  href="javascript:">
-                                    </a>
-                                </p>
+                                <span class="username-a">@an.aspnet_Users.UserName</span> <span class="date">@String.Format("{0:d/M/yyyy HH:mm}", an.DateAdd)</span>
+                                <a style="float: right; margin-right: 5px" title="Báo cáo sai phạm" class="btn-report-mini mark-report-qa"
+                                    data-val="@an.AnswerId" data-type="A" href="javascript:"></a>
+                            </p>
                             <p>
                                 @an.AContent</p>
                         </div>                   

@@ -13,11 +13,16 @@ namespace TraCuuThuatNgu.Controllers
         //
         // GET: /QA/
 
-        public ActionResult Index()
+        public ActionResult Index(int? page)
         {
+
+            int pageNumber = page ?? 1;
+
+            int size = 10;
+
             // get questions
-            QAModel qaModel = new QAModel();            
-            return View(qaModel.GetQuestionPaged(1, 5));
+            QAModel qaModel = new QAModel();
+            return View(qaModel.GetQuestionOrderByDateModifyPaged(pageNumber, size));
         }
 
         [HttpPost]
@@ -47,6 +52,7 @@ namespace TraCuuThuatNgu.Controllers
                     foreach (var i in item.Answers)
                     {
                         AnswerJSON a = new AnswerJSON();
+                        a.Aid = i.AnswerId;
                         a.AContent = i.AContent;
                         a.Qid = i.QuestionId;
                         a.Username = i.aspnet_Users.UserName;
@@ -82,6 +88,7 @@ namespace TraCuuThuatNgu.Controllers
 
     public class AnswerJSON
     {
+        public int Aid { get; set; }
         public string Username { get; set; }
         public string AContent { get; set; }
         public string DateAdd { get; set; }
