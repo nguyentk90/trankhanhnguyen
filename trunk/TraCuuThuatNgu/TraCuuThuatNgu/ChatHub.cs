@@ -5,6 +5,7 @@ using System.Web;
 using Microsoft.AspNet.SignalR;
 using TraCuuThuatNgu.Models;
 using System.Web.Security;
+using System.Security;
 
 namespace TraCuuThuatNgu
 {
@@ -44,12 +45,70 @@ namespace TraCuuThuatNgu
                 answer.DateAdd = DateTime.Now;
                 answer.Reported = 0;
                 answer.QuestionId = qid;
+
+                // Update DateModify
+                qaModel.UpdateQuestion(qid);
                 
                 string date = String.Format("{0:d/M/yyyy HH:mm}", answer.DateAdd);
 
                 qaModel.NewAnswer(answer);
+
+                //answer id
+                int aid = answer.AnswerId;
+
                 // Display all clients
-                Clients.All.newAnswer(currentUser.UserName, content, type, qid, date);
+                Clients.All.newAnswer(currentUser.UserName, content, type, qid, date, aid);
+            }
+        }
+
+        // Report 
+        public void Report(string type, int id)
+        {
+            if (type.Equals("Q"))
+            {
+                qaModel.ReportQuestion(id);
+                Clients.Group("Admin").getNewReportNotify();
+            }
+            else
+            {
+                qaModel.ReportAnswer(id);
+                Clients.Group("Admin").getNewReportNotify();
+            }
+        }
+
+        // Clear Report
+        public void ClearReport(string type, int id)
+        {
+            if (type.Equals("Q"))
+            {
+                qaModel.ClearReportQuestion(id);              
+            }
+            else
+            {
+                qaModel.ClearReportAnswer(id);                
+            }        
+        }
+
+
+        // Delete Question Or Answer
+        public void DeleteQA(string type, int id)
+        {
+            if (type.Equals("Q"))
+            {
+                qaModel.DeleteQuestion(id);
+            }
+            else
+            {
+                qaModel.DeleteAnswer(id);
+            }    
+        }
+
+        // Connect
+        public void Connect(string username)
+        {
+            if (Roles.IsUserInRole(username, "Admin"))
+            {
+                Groups.Add(Context.ConnectionId, "Admin");
             }
         }
     }
