@@ -17,6 +17,7 @@ namespace TraCuuThuatNgu.Models
         public System.Guid UserId { get; set; }
         public string Fullname { get; set; }
         public Nullable<System.DateTime> Birthday { get; set; }
+        public string Avatar { get; set; }
     
         public virtual aspnet_Users aspnet_Users { get; set; }
     }

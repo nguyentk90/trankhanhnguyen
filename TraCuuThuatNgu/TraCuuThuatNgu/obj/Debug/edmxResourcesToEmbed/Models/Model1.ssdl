@@ -180,6 +180,7 @@
     <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
     <Property Name="Fullname" Type="nvarchar" MaxLength="256" />
     <Property Name="Birthday" Type="date" />
+    <Property Name="Avatar" Type="nvarchar" MaxLength="256" />
   </EntityType>
   <EntityType Name="Question">
     <Key>

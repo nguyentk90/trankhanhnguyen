@@ -35,12 +35,12 @@ namespace TraCuuThuatNgu.Models
     
         public virtual ICollection<Comment> Comments { get; set; }
         public virtual ICollection<Favorite> Favorites { get; set; }
-        public virtual Profile Profile { get; set; }
         public virtual ICollection<UserContent> UserContents { get; set; }
         public virtual ICollection<UserHistory> UserHistories { get; set; }
         public virtual aspnet_Membership aspnet_Membership { get; set; }
         public virtual ICollection<aspnet_Roles> aspnet_Roles { get; set; }
         public virtual ICollection<Answer> Answers { get; set; }
         public virtual ICollection<Question> Questions { get; set; }
+        public virtual Profile Profile { get; set; }
     }
 }

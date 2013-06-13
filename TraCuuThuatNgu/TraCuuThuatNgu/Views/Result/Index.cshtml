@@ -136,7 +136,7 @@
         </div>
             }
         @* Suggest when keyword not found*@ 
-        @*<div class="description-result">
+        <div class="description-result">
             <span class="ic-cloud"></span>
             @if (Model.Entry == null)
             {
@@ -152,9 +152,8 @@
                 }
             }
              <script>                 $("a").last().removeClass('suggest-comma');</script>
-        </div>*@
-              
-        
+        </div>
+                      
         @if (Model.Entry != null)
         {
             <div class="divider">
