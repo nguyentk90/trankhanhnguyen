@@ -79,7 +79,7 @@ $(document).ready(function () {
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     if (data.message == 'SUCCESS') {
-                        row.slideUp('slow');
+                        row.fadeOut('slow');
                     } else {
                         alert("Lỗi");
                     }
@@ -134,7 +134,7 @@ $(document).ready(function () {
                 contentType: 'application/json; charset=utf-8',
                 success: function (data) {
                     if (data.message == 'SUCCESS') {
-                        row.slideUp('slow');
+                        row.fadeOut('slow');
                     } else {
                         alert("Lỗi");
                     }

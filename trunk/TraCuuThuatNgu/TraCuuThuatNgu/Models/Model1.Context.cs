@@ -31,7 +31,6 @@ namespace TraCuuThuatNgu.Models
         public DbSet<SearchHistory> SearchHistories { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Topic> Topics { get; set; }
-        public DbSet<Profile> Profiles { get; set; }
         public DbSet<UserContent> UserContents { get; set; }
         public DbSet<WordIndex> WordIndexes { get; set; }
         public DbSet<UserHistory> UserHistories { get; set; }
@@ -41,5 +40,6 @@ namespace TraCuuThuatNgu.Models
         public DbSet<Answer> Answers { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<AutoComplete> AutoCompletes { get; set; }
+        public DbSet<Profile> Profiles { get; set; }
     }
 }

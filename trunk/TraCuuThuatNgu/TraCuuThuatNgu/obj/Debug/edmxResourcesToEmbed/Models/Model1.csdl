@@ -15,11 +15,6 @@
       <End Role="Favorite" EntitySet="Favorites" />
     </AssociationSet>
     <EntitySet Name="Topics" EntityType="TraCuuThuatNguModel.Topic" />
-    <EntitySet Name="Profiles" EntityType="TraCuuThuatNguModel.Profile" />
-    <AssociationSet Name="FK_Profile_aspnet_Users" Association="TraCuuThuatNguModel.FK_Profile_aspnet_Users">
-      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
-      <End Role="Profile" EntitySet="Profiles" />
-    </AssociationSet>
     <EntitySet Name="UserContents" EntityType="TraCuuThuatNguModel.UserContent" />
     <EntitySet Name="WordIndexes" EntityType="TraCuuThuatNguModel.WordIndex" />
     <AssociationSet Name="FK_RawData_aspnet_Users1" Association="TraCuuThuatNguModel.FK_RawData_aspnet_Users1">
@@ -69,6 +64,11 @@
       <End Role="Question" EntitySet="Questions" />
     </AssociationSet>
     <EntitySet Name="AutoCompletes" EntityType="TraCuuThuatNguModel.AutoComplete" />
+    <EntitySet Name="Profiles" EntityType="TraCuuThuatNguModel.Profile" />
+    <AssociationSet Name="FK_Profile_aspnet_Users" Association="TraCuuThuatNguModel.FK_Profile_aspnet_Users">
+      <End Role="aspnet_Users" EntitySet="aspnet_Users" />
+      <End Role="Profile" EntitySet="Profiles" />
+    </AssociationSet>
   </EntityContainer>
   <EntityType Name="aspnet_Users">
     <Key>
@@ -83,13 +83,13 @@
     <Property Type="DateTime" Name="LastActivityDate" Nullable="false" />
     <NavigationProperty Name="Comments" Relationship="TraCuuThuatNguModel.FK_BinhLuan_aspnet_Users" FromRole="aspnet_Users" ToRole="Comment" />
     <NavigationProperty Name="Favorites" Relationship="TraCuuThuatNguModel.FK_YeuThich_aspnet_Users" FromRole="aspnet_Users" ToRole="Favorite" />
-    <NavigationProperty Name="Profile" Relationship="TraCuuThuatNguModel.FK_Profile_aspnet_Users" FromRole="aspnet_Users" ToRole="Profile" />
     <NavigationProperty Name="UserContents" Relationship="TraCuuThuatNguModel.FK_RawData_aspnet_Users1" FromRole="aspnet_Users" ToRole="UserContent" />
     <NavigationProperty Name="UserHistories" Relationship="TraCuuThuatNguModel.FK_UserHistory_aspnet_Users1" FromRole="aspnet_Users" ToRole="UserHistory" />
     <NavigationProperty Name="aspnet_Membership" Relationship="TraCuuThuatNguModel.FK__aspnet_Me__UserI__22AA2996" FromRole="aspnet_Users" ToRole="aspnet_Membership" />
     <NavigationProperty Name="aspnet_Roles" Relationship="TraCuuThuatNguModel.aspnet_UsersInRoles" FromRole="aspnet_Users" ToRole="aspnet_Roles" />
     <NavigationProperty Name="Answers" Relationship="TraCuuThuatNguModel.FK_Answer_aspnet_Users" FromRole="aspnet_Users" ToRole="Answer" />
     <NavigationProperty Name="Questions" Relationship="TraCuuThuatNguModel.FK_Question_aspnet_Users" FromRole="aspnet_Users" ToRole="Question" />
+    <NavigationProperty Name="Profile" Relationship="TraCuuThuatNguModel.FK_Profile_aspnet_Users" FromRole="aspnet_Users" ToRole="Profile" />
   </EntityType>
   <EntityType Name="Comment">
     <Key>
@@ -162,27 +162,6 @@
     <Property Type="String" Name="TopicId" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Type="String" Name="Description" MaxLength="500" FixedLength="false" Unicode="true" />
   </EntityType>
-  <EntityType Name="Profile">
-    <Key>
-      <PropertyRef Name="UserId" />
-    </Key>
-    <Property Type="Guid" Name="UserId" Nullable="false" />
-    <Property Type="String" Name="Fullname" MaxLength="256" FixedLength="false" Unicode="true" />
-    <Property Type="DateTime" Name="Birthday" />
-    <NavigationProperty Name="aspnet_Users" Relationship="TraCuuThuatNguModel.FK_Profile_aspnet_Users" FromRole="Profile" ToRole="aspnet_Users" />
-  </EntityType>
-  <Association Name="FK_Profile_aspnet_Users">
-    <End Type="TraCuuThuatNguModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
-    <End Type="TraCuuThuatNguModel.Profile" Role="Profile" Multiplicity="0..1" />
-    <ReferentialConstraint>
-      <Principal Role="aspnet_Users">
-        <PropertyRef Name="UserId" />
-      </Principal>
-      <Dependent Role="Profile">
-        <PropertyRef Name="UserId" />
-      </Dependent>
-    </ReferentialConstraint>
-  </Association>
   <EntityType Name="UserContent">
     <Key>
       <PropertyRef Name="UserContentId" />
@@ -400,4 +379,26 @@
     </Key>
     <Property Type="String" Name="Keyword" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
   </EntityType>
+  <EntityType Name="Profile">
+    <Key>
+      <PropertyRef Name="UserId" />
+    </Key>
+    <Property Type="Guid" Name="UserId" Nullable="false" />
+    <Property Type="String" Name="Fullname" MaxLength="256" FixedLength="false" Unicode="true" />
+    <Property Type="DateTime" Name="Birthday" />
+    <Property Type="String" Name="Avatar" MaxLength="256" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="aspnet_Users" Relationship="TraCuuThuatNguModel.FK_Profile_aspnet_Users" FromRole="Profile" ToRole="aspnet_Users" />
+  </EntityType>
+  <Association Name="FK_Profile_aspnet_Users">
+    <End Type="TraCuuThuatNguModel.aspnet_Users" Role="aspnet_Users" Multiplicity="1" />
+    <End Type="TraCuuThuatNguModel.Profile" Role="Profile" Multiplicity="0..1" />
+    <ReferentialConstraint>
+      <Principal Role="aspnet_Users">
+        <PropertyRef Name="UserId" />
+      </Principal>
+      <Dependent Role="Profile">
+        <PropertyRef Name="UserId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>
