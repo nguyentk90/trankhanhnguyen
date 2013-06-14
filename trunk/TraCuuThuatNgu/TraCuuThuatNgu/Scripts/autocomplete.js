@@ -15,7 +15,7 @@
     $("#search-input").autocomplete({
         source: function (request, response) {
             $.ajax({
-                url: "/AutoComplete/Index",
+                url: "AutoComplete/Index",
                 data: "{ 'prefix': '" + request.term + "' }",
                 dataType: "json",
                 type: "POST",

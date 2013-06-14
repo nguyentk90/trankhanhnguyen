@@ -110,7 +110,7 @@
 
         if (checkDelete) {        
             $.ajax({
-                url: '/UserHistory/Delete',
+                url: 'UserHistory/Delete',
                 type: 'POST',
                 data: "{ 'historyId': '" + $(this).children().val() + "'}",
                 contentType: 'application/json; charset=utf-8',
