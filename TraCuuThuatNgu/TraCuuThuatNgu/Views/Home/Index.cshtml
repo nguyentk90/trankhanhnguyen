@@ -11,10 +11,10 @@
 }
 <div id="home-search">
     <div id="logo">
-        <img src="../../Content/img/logo4.png" alt="Tra cứu thuật ngữ" />
+        <img src="@Url.Content("~/Content/img/logo4.png")" alt="Tra cứu thuật ngữ" />
     </div>
     <div id="input-search">
-        <form action="/Result" method="get" id="search-form" class="form-wrapper cf">
+        <form action="@Url.Content("~/Result")" method="get" id="search-form" class="form-wrapper cf">
         <input type="text" id="search-input" name="keyword" placeholder="Nhập thuật ngữ..."/>
         <button type="submit">
             Tra cứu</button>

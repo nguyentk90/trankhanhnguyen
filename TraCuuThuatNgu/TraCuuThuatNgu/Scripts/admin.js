@@ -28,12 +28,14 @@ $(document).ready(function () {
 
     // Add synonyms
 
+    // Create variable to store synonyms
     var synonyms = new Array();
     $("#list-synonyms li").each(function (index) {
         console.log(index + ": " + $(this).children().children().first().text());
         synonyms.push($(this).children().children().first().text());
     });
 
+    // Add to array
     $("#add-synonym").click(function () {
         // Check contains in list li
         if ($.trim($("#input-synonym").val()) == "") {
@@ -93,7 +95,6 @@ $(document).ready(function () {
 
     // Clear reported comment
     $(".btn-accept-cm").click(function () {
-
 
         var row = $(this).parent().parent();
 
