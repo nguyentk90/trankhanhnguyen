@@ -16,11 +16,11 @@
 }
 <div id="header-root">
     <div id="logo-root">
-        <a title="Trang chủ" href="/Home"><img src="../../Content/img/logo4.png" alt="Tra cứu thuật ngữ" /></a>
+        <a title="Trang chủ" href="@Url.Content("~/Home")"><img src="@Url.Content("~/Content/img/logo4.png")" alt="Tra cứu thuật ngữ" /></a>
     </div>
     <div id="input-search-root">
     
-        <form class="form-wrapper-mini cf" id="search-form" action="/Result">
+        <form class="form-wrapper-mini cf" id="search-form" action="@Url.Content("~/Result")">
         @if (Request.Params["keyword"].IsEmpty())
         {
             <input type="text" name="keyword" id="search-input" placeholder="Nhập thuật ngữ..."/>

@@ -47,7 +47,7 @@
     //like button
     $('#like-submit').click(function () {
         $.ajax({
-            url: '/Like/Add',
+            url: 'Like/Add',
             type: 'POST',
             data: "{ 'headWord': '" + $('#headWord').text() + "'}",
             contentType: 'application/json; charset=utf-8',
@@ -138,7 +138,7 @@
 
         if (checkDelete) {        
             $.ajax({
-                url: '/Like/Delete',
+                url: 'Like/Delete',
                 type: 'POST',
                 data: "{ 'headWord': '" + $(this).children().val() + "'}",
                 contentType: 'application/json; charset=utf-8',
@@ -165,7 +165,7 @@
 
         if (checkDelete) {        
             $.ajax({
-                url: '/AddContent/Delete',
+                url: 'AddContent/Delete',
                 type: 'POST',
                 data: "{ 'rawDataID': '" + $(this).children().val() + "'}",
                 contentType: 'application/json; charset=utf-8',
@@ -192,7 +192,7 @@
         } else {         
            //$("#add-content-submit").css("background-color","#ccc");
            $.ajax({
-                url: '/AddContent/Add',
+                url: 'AddContent/Add',
                 type: 'POST',
                 data: "{ 'def': '" + $("#def").val() + "','catagory': '" + $("#catagory").val() + "','keyword': '" + $("#keyword").text() + "',"
                 + "'exa': '" + $("#exa").val() + "'}",                
@@ -229,7 +229,7 @@
                 $.ajax({
                     type: 'POST',
                     contentType: "application/json",
-                    url: "/QA",
+                    url: "QA",
                     data: "{ 'limit':'" + limit + "'}",
                     success: function (d) {
                     $(".question-list").empty();
@@ -287,7 +287,7 @@
             $.ajax({
                 type: 'POST',
                 contentType: "application/json",
-                url: "/QA",
+                url: "QA",
                 data: "{ 'limit':'" + limit + "'}",
                 success: function (d) {
                     if (d.message == 'full') {
@@ -348,7 +348,7 @@
             if(checkAuthen=='true')
             {
                $.ajax({
-                url: '/Comment/Report',
+                url: 'Comment/Report',
                 type: 'POST',
                 data: "{ 'commentId': '" + $(this).attr('data-val') + "'}",
                 contentType: 'application/json; charset=utf-8',
