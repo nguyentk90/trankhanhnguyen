@@ -86,7 +86,7 @@ namespace TraCuuThuatNgu.Models
                 foreach (string headWord in synonyms)
                 {
                     // Check headWord exist in database
-                    WordIndex wordIndex = context.WordIndexes.Find(headWord);
+                    WordIndex wordIndex = context.WordIndexes.Find(headWord.Trim());
                     if (wordIndex != null)
                     {
                         //synset.WordIndexes.Add(wordIndex);
@@ -95,7 +95,7 @@ namespace TraCuuThuatNgu.Models
                     {
                         //entry
                         wordIndex = new WordIndex();
-                        wordIndex.HeadWord = headWord;
+                        wordIndex.HeadWord = headWord.Trim();
                         string[] words = headWord.Split(' ');
 
                         if (words.Count() > 1)

@@ -146,9 +146,9 @@
             }
             @foreach (var item in Model.SuggestTerm)
             {
-                if (!Model.Entry.HeadWord.Equals(item.HeadWord))
+                if (!item.HeadWord.Equals(Request.QueryString["keyword"]))
                 {
-                <a class="suggest-term suggest-comma" href="/Result?keyword=@item.HeadWord">@item.HeadWord</a>
+                <a class="suggest-term suggest-comma" href="@Url.Content("~/Result?keyword="+@item.HeadWord)">@item.HeadWord</a>
                 }
             }
              <script>                 $("a").last().removeClass('suggest-comma');</script>
@@ -170,7 +170,7 @@
                     {
                         <div class="itemOut">
                             <a href="#" class="image">
-                                <img src="../Content/img/users/noAvatar.gif" class="img-polaroid"></a>
+                                <img src="@Url.Content("~/Content/img/users/noAvatar.gif")" class="img-polaroid"></a>
                             @if (User.Identity.IsAuthenticated)
                             {                        
                                 <input name="headWord" type="hidden" value='@Request.Params["keyword"].ToString()' />
@@ -211,7 +211,7 @@
                         
                         <div class="itemOut">
                             <a href="#" class="image">
-                                <img src="../Content/img/users/noAvatar.gif" class="img-polaroid"></a>
+                                <img src="@Url.Content("~/Content/img/users/noAvatar.gif")" class="img-polaroid"></a>
                             <div class="text">
                                 <div class="info">
                                     <span class="name">@item.aspnet_Users.UserName</span> <a style="float:right;margin-left:10px" title="Báo cáo sai phạm" class="btn-report mark-report" data-val="@item.CommentId"  href="javascript:">
@@ -237,7 +237,7 @@
 <div class="span span9">
         <div class="block block-sumary alphabet-work">
             <div class="sumary aphab-list">
-                <a class="alphabet-link" href="/Alphabet">Tra cứu theo thứ tự bảng chữ cái</a>                 
+                <a class="alphabet-link" href="@Url.Content("~/Alphabet")">Tra cứu theo thứ tự bảng chữ cái</a>                 
             </div>
         </div>
 </div>
@@ -258,7 +258,7 @@
                 }
                 @foreach (var item in (List<string>)Session["Recent"])
                 { 
-                    <li><a href="/Result?keyword=@item">@item</a></li>  
+                    <li><a href="@Url.Content("~/Result?keyword="+@item)">@item</a></li>  
                 }
                 @{
                     ((List<string>)Session["Recent"]).Reverse();

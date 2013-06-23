@@ -33,7 +33,7 @@
         },
         minLength: 1,
         select: function (event, ui) {
-            window.location.replace("/Result?keyword="+ui.item.value);
+            window.location.replace("Result?keyword="+ui.item.value);
         }
     });   
 

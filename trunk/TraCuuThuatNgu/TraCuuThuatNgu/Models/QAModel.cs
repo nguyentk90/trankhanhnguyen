@@ -52,14 +52,14 @@ namespace TraCuuThuatNgu.Models
         }
 
         // Get list questions that were reported by user --paged
-        public IPagedList<Question> GetQuestionReporedPaged(int page, int size)
-        {
-            return context.Questions
-                .Where(x => x.Answers.Where(y => y.Reported >0 )
-                    .FirstOrDefault() != null || x.Reported > 0)
-                    .OrderByDescending(x=>x.DateModify)
-                    .ToPagedList(page,size);
-        }
+        //public IPagedList<Question> GetQuestionReporedPaged(int page, int size)
+        //{
+        //    return context.Questions
+        //        .Where(x => x.Answers.Where(y => y.Reported >0 )
+        //            .FirstOrDefault() != null || x.Reported > 0)
+        //            .OrderByDescending(x=>x.DateModify)
+        //            .ToPagedList(page,size);
+        //}
 
         // Get total question
         public int ToalQuestions()
